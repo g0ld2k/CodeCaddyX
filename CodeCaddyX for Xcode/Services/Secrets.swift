@@ -14,16 +14,16 @@ struct Secrets {
         }
         return apiKey
     }()
-    
-    static private let secrets: NSDictionary = {
+
+    private static let secrets: NSDictionary = {
         guard let path = Bundle.main.path(forResource: "Secrets", ofType: "plist") else {
             fatalError("Secrets.plist not found.  Copy Secrets_Example.plist to Secrets.plist and provide values for the containing items.")
         }
-        
+
         guard let secrets = NSDictionary(contentsOfFile: path) else {
             fatalError("Secrets.plist is not in the proper format.")
         }
-        
+
         return secrets
     }()
 }

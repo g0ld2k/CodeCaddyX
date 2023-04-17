@@ -3,13 +3,12 @@
 //  CodeCaddyX
 //
 //  Created by Chris Golding on 2023-04-13.
-//--------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 
 import Foundation
 import XcodeKit
 
 class BaseCommand: NSObject, XCSourceEditorCommand {
-
     enum CommandResult {
         case append
         case replace
@@ -23,12 +22,11 @@ class BaseCommand: NSObject, XCSourceEditorCommand {
 
     let apiService = OpenAIConnector()
 
-    func perform(with invocation: XCSourceEditorCommandInvocation) async throws {
+    func perform(with _: XCSourceEditorCommandInvocation) async throws {
         assertionFailure("This command should not be used directly.  Subclass it and use the appropriate methods")
     }
 
     func performSelectionCommand(with invocation: XCSourceEditorCommandInvocation, command: String, resultType: CommandResult, isComment: Bool = true) async throws {
-
         let lines = invocation.buffer.lines as? [String] ?? []
 
         let selections = invocation.buffer.selections as? [XCSourceTextRange] ?? []
@@ -83,12 +81,14 @@ class BaseCommand: NSObject, XCSourceEditorCommand {
     private func formatOutputComment(content: String) -> String {
         var contentAsComment = content
         if content.hasPrefix("/*") == false &&
-            content.hasPrefix("//") == false {
+            content.hasPrefix("//") == false
+        {
             contentAsComment = "/**\n" + content
         }
 
         if contentAsComment.hasPrefix("//") == false &&
-            checkIfAllCommentsHaveBeenClosed(str: contentAsComment) == false {
+            checkIfAllCommentsHaveBeenClosed(str: contentAsComment) == false
+        {
             contentAsComment = contentAsComment + "\n**/"
         }
 

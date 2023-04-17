@@ -61,3 +61,4 @@ playground.xcworkspace
 iOSInjectionProject/
 
 Secrets.plist
+.DS_Store

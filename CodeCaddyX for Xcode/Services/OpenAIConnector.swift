@@ -3,10 +3,10 @@
 //  CodeCaddyX
 //
 //  Created by Chris Golding on 2023-04-13.
-//--------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 
-import Foundation
 import Combine
+import Foundation
 
 // Adapted from: https://medium.com/codex/how-to-use-chatgpt-with-swift-f4ee213d6ba9
 
@@ -18,23 +18,23 @@ class OpenAIConnector: ObservableObject {
     /// This is what stores your messages. You can see how to use it in a SwiftUI view here:
     @Published var messageLog: [[String: String]] = [
         /// Modify this to change the personality of the assistant.
-        ["role": "system", "content": "You're a snarky assistant who acts like a senior developer providing feedback to other senior developers."]
+        ["role": "system", "content": "You're a snarky assistant who acts like a senior developer providing feedback to other senior developers."],
     ]
 
     func sendToAssistant() async throws {
         /// DON'T TOUCH THIS
-        var request = URLRequest(url: self.openAIURL!)
+        var request = URLRequest(url: openAIURL!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("Bearer \(self.openAIKey)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(openAIKey)", forHTTPHeaderField: "Authorization")
 
         let httpBody: [String: Any] = [
             /// In the future, you can use a different chat model here.
-            "model" : "gpt-3.5-turbo",
-            "messages" : messageLog
+            "model": "gpt-3.5-turbo",
+            "messages": messageLog,
         ]
 
-        var httpBodyJson: Data? = nil
+        var httpBodyJson: Data?
 
         do {
             httpBodyJson = try JSONSerialization.data(withJSONObject: httpBody, options: .prettyPrinted)
@@ -58,7 +58,6 @@ class OpenAIConnector: ObservableObject {
         }
     }
 }
-
 
 /// Don't worry about this too much. This just gets rid of errors when using messageLog in a SwiftUI List or ForEach.
 extension Dictionary: Identifiable { public var id: UUID { UUID() } }

@@ -3,7 +3,7 @@
 //  CodeCaddyX
 //
 //  Created by Chris Golding on 2023-04-13.
-//--------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 
 import Foundation
 
@@ -37,7 +37,6 @@ struct Choice: Codable {
     var message: [String: String]
     var finish_reason: String?
 }
-
 
 struct Usage: Codable {
     var prompt_tokens: Int?
