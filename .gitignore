@@ -1,0 +1,63 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata/
+profile
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+## Other
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.swiftpm
+*.playground
+timeline.xctimeline
+playground.xcworkspace
+
+## Package Manager
+## Comment out if not using Swift Package Manager (SPM)
+# .build/
+
+## CocoaPods
+## We recommend against adding the Pods directory to your .gitignore. However
+## you should judge for yourself, the pros and cons are mentioned at:
+## https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+# Pods/
+
+## Carthage
+## Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+## Accio
+## Add this line if you want to avoid checking in source code from Accio dependencies.
+# .accio/
+
+## fastlane
+# fastlane/report.xml
+# fastlane/Preview.html
+# fastlane/screenshots/**/*.png
+# fastlane/test_output
+
+## Code Injection
+# After new code injection tools there's a generated folder /iOSInjectionProject
+iOSInjectionProject/
+
+Secrets.plist

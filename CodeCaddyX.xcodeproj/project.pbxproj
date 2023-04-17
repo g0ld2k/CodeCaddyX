@@ -1,0 +1,604 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83BBF99829EDBD1C00BDAF58 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83BBF99729EDBD1C00BDAF58 /* Secrets.plist */; };
+		83BBF99A29EDBDFD00BDAF58 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBF99929EDBDFD00BDAF58 /* Secrets.swift */; };
+		E109CCD629E8380B00901432 /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11463B829E832C600B79D74 /* XcodeKit.framework */; };
+		E109CCD729E8380B00901432 /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E11463B829E832C600B79D74 /* XcodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E11463A229E8322F00B79D74 /* CodeCaddyX_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11463A129E8322F00B79D74 /* CodeCaddyX_App.swift */; };
+		E11463A429E8322F00B79D74 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11463A329E8322F00B79D74 /* ContentView.swift */; };
+		E11463A629E8323300B79D74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11463A529E8323300B79D74 /* Assets.xcassets */; };
+		E11463A929E8323300B79D74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11463A829E8323300B79D74 /* Preview Assets.xcassets */; };
+		E11463B729E832C600B79D74 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11463B629E832C500B79D74 /* Cocoa.framework */; };
+		E11463BC29E832C600B79D74 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11463BB29E832C600B79D74 /* SourceEditorExtension.swift */; };
+		E11463BE29E832C600B79D74 /* ExplainCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11463BD29E832C600B79D74 /* ExplainCommand.swift */; };
+		E11463C329E832C600B79D74 /* CodeCaddyX for Xcode.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E11463B429E832C500B79D74 /* CodeCaddyX for Xcode.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E162659829E8450D002D881C /* OpenAIResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659729E8450D002D881C /* OpenAIResponseHandler.swift */; };
+		E162659A29E8454E002D881C /* OpenAIConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659929E8454E002D881C /* OpenAIConnector.swift */; };
+		E162659C29E85BEC002D881C /* AddCommentsToCodeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659B29E85BEC002D881C /* AddCommentsToCodeCommand.swift */; };
+		E162659F29E88CB4002D881C /* GenerateUnitTestsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659E29E88CB4002D881C /* GenerateUnitTestsCommand.swift */; };
+		E16265A129E890B4002D881C /* GenerateImprovementsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16265A029E890B3002D881C /* GenerateImprovementsCommand.swift */; };
+		E16265A329E8A0F9002D881C /* BaseCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16265A229E8A0F9002D881C /* BaseCommand.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E11463C129E832C600B79D74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E114639629E8322F00B79D74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E11463B329E832C500B79D74;
+			remoteInfo = XcodeGPTXcodeExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E109CCD829E8380B00901432 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E109CCD729E8380B00901432 /* XcodeKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E11463C729E832C600B79D74 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E11463C329E832C600B79D74 /* CodeCaddyX for Xcode.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		83BBF99729EDBD1C00BDAF58 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		83BBF99929EDBDFD00BDAF58 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		E114639E29E8322F00B79D74 /* CodeCaddyX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeCaddyX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E11463A129E8322F00B79D74 /* CodeCaddyX_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeCaddyX_App.swift; sourceTree = "<group>"; };
+		E11463A329E8322F00B79D74 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E11463A529E8323300B79D74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E11463A829E8323300B79D74 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E11463AA29E8323300B79D74 /* CodeCaddyX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CodeCaddyX.entitlements; sourceTree = "<group>"; };
+		E11463B429E832C500B79D74 /* CodeCaddyX for Xcode.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "CodeCaddyX for Xcode.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E11463B629E832C500B79D74 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		E11463B829E832C600B79D74 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
+		E11463BB29E832C600B79D74 /* SourceEditorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorExtension.swift; sourceTree = "<group>"; };
+		E11463BD29E832C600B79D74 /* ExplainCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainCommand.swift; sourceTree = "<group>"; };
+		E11463BF29E832C600B79D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E11463C029E832C600B79D74 /* CodeCaddyX for Xcode.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CodeCaddyX for Xcode.entitlements"; sourceTree = "<group>"; };
+		E162659729E8450D002D881C /* OpenAIResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIResponseHandler.swift; sourceTree = "<group>"; };
+		E162659929E8454E002D881C /* OpenAIConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIConnector.swift; sourceTree = "<group>"; };
+		E162659B29E85BEC002D881C /* AddCommentsToCodeCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentsToCodeCommand.swift; sourceTree = "<group>"; };
+		E162659E29E88CB4002D881C /* GenerateUnitTestsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateUnitTestsCommand.swift; sourceTree = "<group>"; };
+		E16265A029E890B3002D881C /* GenerateImprovementsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImprovementsCommand.swift; sourceTree = "<group>"; };
+		E16265A229E8A0F9002D881C /* BaseCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCommand.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E114639B29E8322F00B79D74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E11463B129E832C500B79D74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E11463B729E832C600B79D74 /* Cocoa.framework in Frameworks */,
+				E109CCD629E8380B00901432 /* XcodeKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E114639529E8322F00B79D74 = {
+			isa = PBXGroup;
+			children = (
+				E11463A029E8322F00B79D74 /* CodeCaddyX */,
+				E11463BA29E832C600B79D74 /* CodeCaddyX for Xcode */,
+				E11463B529E832C500B79D74 /* Frameworks */,
+				E114639F29E8322F00B79D74 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E114639F29E8322F00B79D74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E114639E29E8322F00B79D74 /* CodeCaddyX.app */,
+				E11463B429E832C500B79D74 /* CodeCaddyX for Xcode.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E11463A029E8322F00B79D74 /* CodeCaddyX */ = {
+			isa = PBXGroup;
+			children = (
+				E11463A129E8322F00B79D74 /* CodeCaddyX_App.swift */,
+				E11463A329E8322F00B79D74 /* ContentView.swift */,
+				E11463A529E8323300B79D74 /* Assets.xcassets */,
+				E11463AA29E8323300B79D74 /* CodeCaddyX.entitlements */,
+				E11463A729E8323300B79D74 /* Preview Content */,
+			);
+			path = CodeCaddyX;
+			sourceTree = "<group>";
+		};
+		E11463A729E8323300B79D74 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E11463A829E8323300B79D74 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E11463B529E832C500B79D74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E11463B629E832C500B79D74 /* Cocoa.framework */,
+				E11463B829E832C600B79D74 /* XcodeKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E11463BA29E832C600B79D74 /* CodeCaddyX for Xcode */ = {
+			isa = PBXGroup;
+			children = (
+				E162659D29E88C6C002D881C /* Commands */,
+				E162659629E84501002D881C /* Model */,
+				E162659329E83EB9002D881C /* Services */,
+				E11463BB29E832C600B79D74 /* SourceEditorExtension.swift */,
+				E11463BF29E832C600B79D74 /* Info.plist */,
+				E11463C029E832C600B79D74 /* CodeCaddyX for Xcode.entitlements */,
+				83BBF99729EDBD1C00BDAF58 /* Secrets.plist */,
+			);
+			path = "CodeCaddyX for Xcode";
+			sourceTree = "<group>";
+		};
+		E162659329E83EB9002D881C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E162659929E8454E002D881C /* OpenAIConnector.swift */,
+				83BBF99929EDBDFD00BDAF58 /* Secrets.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E162659629E84501002D881C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E162659729E8450D002D881C /* OpenAIResponseHandler.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E162659D29E88C6C002D881C /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				E162659B29E85BEC002D881C /* AddCommentsToCodeCommand.swift */,
+				E162659E29E88CB4002D881C /* GenerateUnitTestsCommand.swift */,
+				E11463BD29E832C600B79D74 /* ExplainCommand.swift */,
+				E16265A029E890B3002D881C /* GenerateImprovementsCommand.swift */,
+				E16265A229E8A0F9002D881C /* BaseCommand.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E114639D29E8322F00B79D74 /* CodeCaddyX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E11463AD29E8323300B79D74 /* Build configuration list for PBXNativeTarget "CodeCaddyX" */;
+			buildPhases = (
+				E114639A29E8322F00B79D74 /* Sources */,
+				E114639B29E8322F00B79D74 /* Frameworks */,
+				E114639C29E8322F00B79D74 /* Resources */,
+				E11463C729E832C600B79D74 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E11463C229E832C600B79D74 /* PBXTargetDependency */,
+			);
+			name = CodeCaddyX;
+			productName = "Xcode GPT";
+			productReference = E114639E29E8322F00B79D74 /* CodeCaddyX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E11463B329E832C500B79D74 /* CodeCaddyX for Xcode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E11463C429E832C600B79D74 /* Build configuration list for PBXNativeTarget "CodeCaddyX for Xcode" */;
+			buildPhases = (
+				E11463B029E832C500B79D74 /* Sources */,
+				E11463B129E832C500B79D74 /* Frameworks */,
+				E11463B229E832C500B79D74 /* Resources */,
+				E109CCD829E8380B00901432 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CodeCaddyX for Xcode";
+			productName = XcodeGPTXcodeExtension;
+			productReference = E11463B429E832C500B79D74 /* CodeCaddyX for Xcode.appex */;
+			productType = "com.apple.product-type.xcode-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E114639629E8322F00B79D74 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					E114639D29E8322F00B79D74 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					E11463B329E832C500B79D74 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = E114639929E8322F00B79D74 /* Build configuration list for PBXProject "CodeCaddyX" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E114639529E8322F00B79D74;
+			productRefGroup = E114639F29E8322F00B79D74 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E114639D29E8322F00B79D74 /* CodeCaddyX */,
+				E11463B329E832C500B79D74 /* CodeCaddyX for Xcode */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E114639C29E8322F00B79D74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E11463A929E8323300B79D74 /* Preview Assets.xcassets in Resources */,
+				E11463A629E8323300B79D74 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E11463B229E832C500B79D74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83BBF99829EDBD1C00BDAF58 /* Secrets.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E114639A29E8322F00B79D74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E11463A429E8322F00B79D74 /* ContentView.swift in Sources */,
+				E11463A229E8322F00B79D74 /* CodeCaddyX_App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E11463B029E832C500B79D74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E162659F29E88CB4002D881C /* GenerateUnitTestsCommand.swift in Sources */,
+				83BBF99A29EDBDFD00BDAF58 /* Secrets.swift in Sources */,
+				E162659A29E8454E002D881C /* OpenAIConnector.swift in Sources */,
+				E11463BC29E832C600B79D74 /* SourceEditorExtension.swift in Sources */,
+				E11463BE29E832C600B79D74 /* ExplainCommand.swift in Sources */,
+				E16265A129E890B4002D881C /* GenerateImprovementsCommand.swift in Sources */,
+				E16265A329E8A0F9002D881C /* BaseCommand.swift in Sources */,
+				E162659829E8450D002D881C /* OpenAIResponseHandler.swift in Sources */,
+				E162659C29E85BEC002D881C /* AddCommentsToCodeCommand.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E11463C229E832C600B79D74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E11463B329E832C500B79D74 /* CodeCaddyX for Xcode */;
+			targetProxy = E11463C129E832C600B79D74 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E11463AB29E8323300B79D74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E11463AC29E8323300B79D74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		E11463AE29E8323300B79D74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CodeCaddyX/CodeCaddyX.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"CodeCaddyX/Preview Content\"";
+				DEVELOPMENT_TEAM = M3EDHBHQ38;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 Chris Golding.  All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddyX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E11463AF29E8323300B79D74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CodeCaddyX/CodeCaddyX.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"CodeCaddyX/Preview Content\"";
+				DEVELOPMENT_TEAM = M3EDHBHQ38;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 Chris Golding.  All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddyX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E11463C529E832C600B79D74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "CodeCaddyX for Xcode/CodeCaddyX for Xcode.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = M3EDHBHQ38;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "CodeCaddyX for Xcode/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = CodeCaddyX;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 Chris Golding.  All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddyX.CodeCaddyXforXcode;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E11463C629E832C600B79D74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "CodeCaddyX for Xcode/CodeCaddyX for Xcode.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = M3EDHBHQ38;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "CodeCaddyX for Xcode/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = CodeCaddyX;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 Chris Golding.  All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddyX.CodeCaddyXforXcode;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E114639929E8322F00B79D74 /* Build configuration list for PBXProject "CodeCaddyX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E11463AB29E8323300B79D74 /* Debug */,
+				E11463AC29E8323300B79D74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E11463AD29E8323300B79D74 /* Build configuration list for PBXNativeTarget "CodeCaddyX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E11463AE29E8323300B79D74 /* Debug */,
+				E11463AF29E8323300B79D74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E11463C429E832C600B79D74 /* Build configuration list for PBXNativeTarget "CodeCaddyX for Xcode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E11463C529E832C600B79D74 /* Debug */,
+				E11463C629E832C600B79D74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E114639629E8322F00B79D74 /* Project object */;
+}
