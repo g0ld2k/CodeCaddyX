@@ -19,12 +19,23 @@
 		E11463BC29E832C600B79D74 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11463BB29E832C600B79D74 /* SourceEditorExtension.swift */; };
 		E11463BE29E832C600B79D74 /* ExplainCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11463BD29E832C600B79D74 /* ExplainCommand.swift */; };
 		E11463C329E832C600B79D74 /* CodeCaddyX for Xcode.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E11463B429E832C500B79D74 /* CodeCaddyX for Xcode.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E162659829E8450D002D881C /* OpenAIResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659729E8450D002D881C /* OpenAIResponseHandler.swift */; };
-		E162659A29E8454E002D881C /* OpenAIConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659929E8454E002D881C /* OpenAIConnector.swift */; };
+		E14C4AE229F0994200344714 /* CodeCaddyShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AB943229F039C1006C3AC4 /* CodeCaddyShared.framework */; };
+		E14C4AE329F0994200344714 /* CodeCaddyShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E1AB943229F039C1006C3AC4 /* CodeCaddyShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E162659C29E85BEC002D881C /* AddCommentsToCodeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659B29E85BEC002D881C /* AddCommentsToCodeCommand.swift */; };
 		E162659F29E88CB4002D881C /* GenerateUnitTestsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659E29E88CB4002D881C /* GenerateUnitTestsCommand.swift */; };
 		E16265A129E890B4002D881C /* GenerateImprovementsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16265A029E890B3002D881C /* GenerateImprovementsCommand.swift */; };
 		E16265A329E8A0F9002D881C /* BaseCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16265A229E8A0F9002D881C /* BaseCommand.swift */; };
+		E1AB942C29EE1744006C3AC4 /* RememberCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB942B29EE1744006C3AC4 /* RememberCommand.swift */; };
+		E1AB943529F039C2006C3AC4 /* CodeCaddyShared.h in Headers */ = {isa = PBXBuildFile; fileRef = E1AB943429F039C2006C3AC4 /* CodeCaddyShared.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1AB943829F039C2006C3AC4 /* CodeCaddyShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AB943229F039C1006C3AC4 /* CodeCaddyShared.framework */; };
+		E1AB943929F039C2006C3AC4 /* CodeCaddyShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E1AB943229F039C1006C3AC4 /* CodeCaddyShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E1AB944229F040B9006C3AC4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AB944129F040B9006C3AC4 /* Security.framework */; };
+		E1AB944429F04143006C3AC4 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB943F29F039E3006C3AC4 /* KeychainService.swift */; };
+		E1AB944529F0628C006C3AC4 /* OpenAIConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659929E8454E002D881C /* OpenAIConnector.swift */; };
+		E1AB944629F062A3006C3AC4 /* OpenAIResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659729E8450D002D881C /* OpenAIResponseHandler.swift */; };
+		E1AB944829F070DF006C3AC4 /* CodeCaddyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB944729F070DF006C3AC4 /* CodeCaddyAppDelegate.swift */; };
+		E1AB945029F08A8E006C3AC4 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = E1AB944F29F08A8E006C3AC4 /* MarkdownUI */; };
+		E1AB945229F08EA5006C3AC4 /* IncomingCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB945129F08EA5006C3AC4 /* IncomingCommandHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +46,20 @@
 			remoteGlobalIDString = E11463B329E832C500B79D74;
 			remoteInfo = XcodeGPTXcodeExtension;
 		};
+		E14C4AE429F0994200344714 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E114639629E8322F00B79D74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1AB943129F039C1006C3AC4;
+			remoteInfo = CodeCaddyShared;
+		};
+		E1AB943629F039C2006C3AC4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E114639629E8322F00B79D74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1AB943129F039C1006C3AC4;
+			remoteInfo = CodeCaddyShared;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +69,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E14C4AE329F0994200344714 /* CodeCaddyShared.framework in Embed Frameworks */,
 				E109CCD729E8380B00901432 /* XcodeKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -58,6 +84,17 @@
 				E11463C329E832C600B79D74 /* CodeCaddyX for Xcode.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1AB943D29F039C2006C3AC4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E1AB943929F039C2006C3AC4 /* CodeCaddyShared.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -84,6 +121,14 @@
 		E162659E29E88CB4002D881C /* GenerateUnitTestsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateUnitTestsCommand.swift; sourceTree = "<group>"; };
 		E16265A029E890B3002D881C /* GenerateImprovementsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImprovementsCommand.swift; sourceTree = "<group>"; };
 		E16265A229E8A0F9002D881C /* BaseCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCommand.swift; sourceTree = "<group>"; };
+		E1AB942A29EE1703006C3AC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E1AB942B29EE1744006C3AC4 /* RememberCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberCommand.swift; sourceTree = "<group>"; };
+		E1AB943229F039C1006C3AC4 /* CodeCaddyShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CodeCaddyShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1AB943429F039C2006C3AC4 /* CodeCaddyShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeCaddyShared.h; sourceTree = "<group>"; };
+		E1AB943F29F039E3006C3AC4 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		E1AB944129F040B9006C3AC4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E1AB944729F070DF006C3AC4 /* CodeCaddyAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeCaddyAppDelegate.swift; sourceTree = "<group>"; };
+		E1AB945129F08EA5006C3AC4 /* IncomingCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCommandHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +136,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1AB943829F039C2006C3AC4 /* CodeCaddyShared.framework in Frameworks */,
+				E1AB945029F08A8E006C3AC4 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +147,15 @@
 			files = (
 				E11463B729E832C600B79D74 /* Cocoa.framework in Frameworks */,
 				E109CCD629E8380B00901432 /* XcodeKit.framework in Frameworks */,
+				E14C4AE229F0994200344714 /* CodeCaddyShared.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1AB942F29F039C1006C3AC4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1AB944229F040B9006C3AC4 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +167,7 @@
 			children = (
 				E11463A029E8322F00B79D74 /* CodeCaddyX */,
 				E11463BA29E832C600B79D74 /* CodeCaddyX for Xcode */,
+				E1AB943329F039C2006C3AC4 /* CodeCaddyShared */,
 				E11463B529E832C500B79D74 /* Frameworks */,
 				E114639F29E8322F00B79D74 /* Products */,
 			);
@@ -121,6 +178,7 @@
 			children = (
 				E114639E29E8322F00B79D74 /* CodeCaddyX.app */,
 				E11463B429E832C500B79D74 /* CodeCaddyX for Xcode.appex */,
+				E1AB943229F039C1006C3AC4 /* CodeCaddyShared.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,11 +186,14 @@
 		E11463A029E8322F00B79D74 /* CodeCaddyX */ = {
 			isa = PBXGroup;
 			children = (
+				E1AB942A29EE1703006C3AC4 /* Info.plist */,
 				E11463A129E8322F00B79D74 /* CodeCaddyX_App.swift */,
 				E11463A329E8322F00B79D74 /* ContentView.swift */,
 				E11463A529E8323300B79D74 /* Assets.xcassets */,
 				E11463AA29E8323300B79D74 /* CodeCaddyX.entitlements */,
 				E11463A729E8323300B79D74 /* Preview Content */,
+				E1AB944729F070DF006C3AC4 /* CodeCaddyAppDelegate.swift */,
+				E1AB945129F08EA5006C3AC4 /* IncomingCommandHandler.swift */,
 			);
 			path = CodeCaddyX;
 			sourceTree = "<group>";
@@ -148,6 +209,7 @@
 		E11463B529E832C500B79D74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1AB944129F040B9006C3AC4 /* Security.framework */,
 				E11463B629E832C500B79D74 /* Cocoa.framework */,
 				E11463B829E832C600B79D74 /* XcodeKit.framework */,
 			);
@@ -158,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				E162659D29E88C6C002D881C /* Commands */,
-				E162659629E84501002D881C /* Model */,
 				E162659329E83EB9002D881C /* Services */,
 				E11463BB29E832C600B79D74 /* SourceEditorExtension.swift */,
 				E11463BF29E832C600B79D74 /* Info.plist */,
@@ -171,7 +232,6 @@
 		E162659329E83EB9002D881C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E162659929E8454E002D881C /* OpenAIConnector.swift */,
 				83BBF99929EDBDFD00BDAF58 /* Secrets.swift */,
 			);
 			path = Services;
@@ -193,11 +253,42 @@
 				E11463BD29E832C600B79D74 /* ExplainCommand.swift */,
 				E16265A029E890B3002D881C /* GenerateImprovementsCommand.swift */,
 				E16265A229E8A0F9002D881C /* BaseCommand.swift */,
+				E1AB942B29EE1744006C3AC4 /* RememberCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
 		};
+		E1AB943329F039C2006C3AC4 /* CodeCaddyShared */ = {
+			isa = PBXGroup;
+			children = (
+				E162659629E84501002D881C /* Model */,
+				E1AB943E29F039D0006C3AC4 /* Services */,
+				E1AB943429F039C2006C3AC4 /* CodeCaddyShared.h */,
+			);
+			path = CodeCaddyShared;
+			sourceTree = "<group>";
+		};
+		E1AB943E29F039D0006C3AC4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E162659929E8454E002D881C /* OpenAIConnector.swift */,
+				E1AB943F29F039E3006C3AC4 /* KeychainService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E1AB942D29F039C1006C3AC4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1AB943529F039C2006C3AC4 /* CodeCaddyShared.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		E114639D29E8322F00B79D74 /* CodeCaddyX */ = {
@@ -208,13 +299,18 @@
 				E114639B29E8322F00B79D74 /* Frameworks */,
 				E114639C29E8322F00B79D74 /* Resources */,
 				E11463C729E832C600B79D74 /* Embed Foundation Extensions */,
+				E1AB943D29F039C2006C3AC4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				E11463C229E832C600B79D74 /* PBXTargetDependency */,
+				E1AB943729F039C2006C3AC4 /* PBXTargetDependency */,
 			);
 			name = CodeCaddyX;
+			packageProductDependencies = (
+				E1AB944F29F08A8E006C3AC4 /* MarkdownUI */,
+			);
 			productName = "Xcode GPT";
 			productReference = E114639E29E8322F00B79D74 /* CodeCaddyX.app */;
 			productType = "com.apple.product-type.application";
@@ -231,11 +327,30 @@
 			buildRules = (
 			);
 			dependencies = (
+				E14C4AE529F0994200344714 /* PBXTargetDependency */,
 			);
 			name = "CodeCaddyX for Xcode";
 			productName = XcodeGPTXcodeExtension;
 			productReference = E11463B429E832C500B79D74 /* CodeCaddyX for Xcode.appex */;
 			productType = "com.apple.product-type.xcode-extension";
+		};
+		E1AB943129F039C1006C3AC4 /* CodeCaddyShared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1AB943A29F039C2006C3AC4 /* Build configuration list for PBXNativeTarget "CodeCaddyShared" */;
+			buildPhases = (
+				E1AB942D29F039C1006C3AC4 /* Headers */,
+				E1AB942E29F039C1006C3AC4 /* Sources */,
+				E1AB942F29F039C1006C3AC4 /* Frameworks */,
+				E1AB943029F039C1006C3AC4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CodeCaddyShared;
+			productName = CodeCaddyShared;
+			productReference = E1AB943229F039C1006C3AC4 /* CodeCaddyShared.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -253,6 +368,10 @@
 					E11463B329E832C500B79D74 = {
 						CreatedOnToolsVersion = 14.2;
 					};
+					E1AB943129F039C1006C3AC4 = {
+						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
+					};
 				};
 			};
 			buildConfigurationList = E114639929E8322F00B79D74 /* Build configuration list for PBXProject "CodeCaddyX" */;
@@ -264,12 +383,16 @@
 				Base,
 			);
 			mainGroup = E114639529E8322F00B79D74;
+			packageReferences = (
+				E1AB944E29F08A8E006C3AC4 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+			);
 			productRefGroup = E114639F29E8322F00B79D74 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E114639D29E8322F00B79D74 /* CodeCaddyX */,
 				E11463B329E832C500B79D74 /* CodeCaddyX for Xcode */,
+				E1AB943129F039C1006C3AC4 /* CodeCaddyShared */,
 			);
 		};
 /* End PBXProject section */
@@ -292,6 +415,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E1AB943029F039C1006C3AC4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -299,6 +429,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1AB945229F08EA5006C3AC4 /* IncomingCommandHandler.swift in Sources */,
+				E1AB944829F070DF006C3AC4 /* CodeCaddyAppDelegate.swift in Sources */,
 				E11463A429E8322F00B79D74 /* ContentView.swift in Sources */,
 				E11463A229E8322F00B79D74 /* CodeCaddyX_App.swift in Sources */,
 			);
@@ -310,13 +442,22 @@
 			files = (
 				E162659F29E88CB4002D881C /* GenerateUnitTestsCommand.swift in Sources */,
 				83BBF99A29EDBDFD00BDAF58 /* Secrets.swift in Sources */,
-				E162659A29E8454E002D881C /* OpenAIConnector.swift in Sources */,
 				E11463BC29E832C600B79D74 /* SourceEditorExtension.swift in Sources */,
+				E1AB942C29EE1744006C3AC4 /* RememberCommand.swift in Sources */,
 				E11463BE29E832C600B79D74 /* ExplainCommand.swift in Sources */,
 				E16265A129E890B4002D881C /* GenerateImprovementsCommand.swift in Sources */,
 				E16265A329E8A0F9002D881C /* BaseCommand.swift in Sources */,
-				E162659829E8450D002D881C /* OpenAIResponseHandler.swift in Sources */,
 				E162659C29E85BEC002D881C /* AddCommentsToCodeCommand.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1AB942E29F039C1006C3AC4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1AB944429F04143006C3AC4 /* KeychainService.swift in Sources */,
+				E1AB944629F062A3006C3AC4 /* OpenAIResponseHandler.swift in Sources */,
+				E1AB944529F0628C006C3AC4 /* OpenAIConnector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +468,16 @@
 			isa = PBXTargetDependency;
 			target = E11463B329E832C500B79D74 /* CodeCaddyX for Xcode */;
 			targetProxy = E11463C129E832C600B79D74 /* PBXContainerItemProxy */;
+		};
+		E14C4AE529F0994200344714 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1AB943129F039C1006C3AC4 /* CodeCaddyShared */;
+			targetProxy = E14C4AE429F0994200344714 /* PBXContainerItemProxy */;
+		};
+		E1AB943729F039C2006C3AC4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1AB943129F039C1006C3AC4 /* CodeCaddyShared */;
+			targetProxy = E1AB943629F039C2006C3AC4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -452,6 +603,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = CodeCaddyX/CodeCaddyX.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -463,6 +615,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CodeCaddyX/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 Chris Golding.  All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -482,6 +635,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = CodeCaddyX/CodeCaddyX.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -493,6 +647,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CodeCaddyX/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 Chris Golding.  All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -568,6 +723,77 @@
 			};
 			name = Release;
 		};
+		E1AB943B29F039C2006C3AC4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Y8UBN3X83H;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 ResMed Ltd.  All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddyShared;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E1AB943C29F039C2006C3AC4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Y8UBN3X83H;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 ResMed Ltd.  All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddyShared;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -598,7 +824,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E1AB943A29F039C2006C3AC4 /* Build configuration list for PBXNativeTarget "CodeCaddyShared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1AB943B29F039C2006C3AC4 /* Debug */,
+				E1AB943C29F039C2006C3AC4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E1AB944E29F08A8E006C3AC4 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E1AB944F29F08A8E006C3AC4 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1AB944E29F08A8E006C3AC4 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E114639629E8322F00B79D74 /* Project object */;
 }
