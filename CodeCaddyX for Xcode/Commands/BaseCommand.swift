@@ -7,6 +7,7 @@
 
 import Foundation
 import XcodeKit
+import CodeCaddyShared
 
 class BaseCommand: NSObject, XCSourceEditorCommand {
     enum CommandResult {

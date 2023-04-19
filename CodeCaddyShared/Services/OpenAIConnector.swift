@@ -10,23 +10,33 @@ import Foundation
 
 // Adapted from: https://medium.com/codex/how-to-use-chatgpt-with-swift-f4ee213d6ba9
 
-class OpenAIConnector: ObservableObject {
+public enum OpenAIConnectorError: Error {
+    case apiKeyNotFound
+}
+
+public class OpenAIConnector: ObservableObject {
     /// This URL might change in the future, so if you get an error, make sure to check the OpenAI API Reference.
     let openAIURL = URL(string: "https://api.openai.com/v1/chat/completions")
-    let openAIKey = Secrets.chatGPTApiKey
 
     /// This is what stores your messages. You can see how to use it in a SwiftUI view here:
-    @Published var messageLog: [[String: String]] = [
+    @Published public var messageLog: [[String: String]] = [
         /// Modify this to change the personality of the assistant.
         ["role": "system", "content": "You're a snarky assistant who acts like a senior developer providing feedback to other senior developers."],
     ]
 
-    func sendToAssistant() async throws {
-        /// DON'T TOUCH THIS
+    public init() { }
+
+    public func sendToAssistant() async throws {
+
+        guard let apiKey = try? await KeychainService.shared.load(secretKey: KeychainKeys.openAIAPIKey) else {
+            print("API Key Not Found")
+            return
+        }
+
         var request = URLRequest(url: openAIURL!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("Bearer \(openAIKey)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
 
         let httpBody: [String: Any] = [
             /// In the future, you can use a different chat model here.
@@ -50,7 +60,9 @@ class OpenAIConnector: ObservableObject {
                 let jsonStr = String(data: requestData, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!
                 print(jsonStr)
                 let responseHandler = OpenAIResponseHandler()
-                logMessage((responseHandler.decodeJson(jsonString: jsonStr)?.choices[0].message["content"])!, messageUserType: .assistant)
+                if let messageContent = responseHandler.decodeJson(jsonString: jsonStr)?.choices[0].message["content"] {
+                    logMessage(messageContent, messageUserType: .assistant)
+                }
             }
         } catch {
             print("Error: \(error.localizedDescription)")
@@ -85,7 +97,7 @@ extension OpenAIConnector {
 
 extension OpenAIConnector {
     /// This function makes it simpler to append items to messageLog.
-    func logMessage(_ message: String, messageUserType: MessageUserType) {
+    public func logMessage(_ message: String, messageUserType: MessageUserType) {
         var messageUserTypeString = ""
         switch messageUserType {
         case .user:
@@ -97,7 +109,7 @@ extension OpenAIConnector {
         messageLog.append(["role": messageUserTypeString, "content": message])
     }
 
-    enum MessageUserType {
+    public enum MessageUserType {
         case user
         case assistant
     }
