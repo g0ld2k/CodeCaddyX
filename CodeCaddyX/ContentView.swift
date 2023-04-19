@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CodeCaddyShared
+import MarkdownUI
 
 struct SettingsView: View {
     @State private var openAiApiKey: String = ""
@@ -70,25 +71,59 @@ struct SettingsView: View {
 }
 
 struct OutputView: View {
+    @EnvironmentObject var incomingCommandHandler: IncomingCommandHandler
+
     var body: some View {
-        ScrollView {
-            Text("Output:")
-                .font(.headline)
-            Text("""
-                func helloWorld() {
-                    print("Hello, world!")
+
+            if incomingCommandHandler.isExecuting {
+                ProgressView("Asking ChatGPT...")
+            } else {
+                HStack {
+                    ScrollView {
+                        VStack {
+                            HStack {
+                                Text("Input:")
+                                Spacer()
+                            }
+                            .font(.headline)
+
+                            Markdown(incomingCommandHandler.commandInput)
+                                .textSelection(.enabled)
+                            Spacer()
+                        }
+                    }
+                    .padding()
+
+
+                    Divider()
+
+                    ScrollView {
+                        VStack {
+                            HStack {
+                                Text("Output:")
+                                Spacer()
+                            }
+                            .font(.headline)
+
+                            Markdown(incomingCommandHandler.commandOutput)
+                                .textSelection(.enabled)
+                            Spacer()
+                        }
+                    }
+                    .padding()
                 }
-                """)
-            .font(.system(.body, design: .monospaced))
-        }
-        .padding()
+            }
+
     }
 }
 
 struct ContentView: View {
+    @EnvironmentObject var incomingCommandHandler: IncomingCommandHandler
+
     var body: some View {
         TabView {
             OutputView()
+                .environmentObject(incomingCommandHandler)
                 .tabItem {
                     Image(systemName: "doc.text.magnifyingglass")
                     Text("Output")

@@ -1,14 +1,4 @@
-// -------------------------------------------------------------------------
-// This item is the property of ResMed Ltd, and contains confidential and trade
-// secret information. It may not be transferred from the custody or control of
-// ResMed except as authorized in writing by an officer of ResMed. Neither this
-// item nor the information it contains may be used, transferred, reproduced,
-// published, or disclosed, in whole or in part, and directly or indirectly,
-// except as expressly authorized by an officer of ResMed, pursuant to written
-// agreement.
-//
-// Copyright (c) 2023 ResMed Ltd.  All rights reserved.
-//-------------------------------------------------------------------------
+
 
 import Foundation
 import XcodeKit
@@ -16,7 +6,28 @@ import AppKit
 
 class RememberCommand: BaseCommand {
     override func perform(with invocation: XCSourceEditorCommandInvocation) async throws {
-        let url = URL(string: "codecaddyx://some/path")!
-        NSWorkspace.shared.open(url)
+
+        let lines = invocation.buffer.lines as? [String] ?? []
+
+        let selections = invocation.buffer.selections as? [XCSourceTextRange] ?? []
+        for selection in selections {
+            let indices: [Int] = Array(selection.start.line ... selection.end.line)
+
+            // Get selected text
+            var selectedText = ""
+            for i in 0 ..< indices.count {
+                guard lines.count > indices[i] else { break }
+                selectedText += lines[indices[i]]
+            }
+
+            if let encodedCodeString = selectedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                let customURLString = "codecaddyx://receiveCode?command=explain&code=\(encodedCodeString)"
+                if let url = URL(string: customURLString) {
+                    // Open the URL to launch the other app
+                    NSWorkspace.shared.open(url)
+                }
+            }
+
+        }
     }
 }

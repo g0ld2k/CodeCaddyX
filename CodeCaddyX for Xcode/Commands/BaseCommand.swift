@@ -32,8 +32,8 @@ class BaseCommand: NSObject, XCSourceEditorCommand {
 
         let selections = invocation.buffer.selections as? [XCSourceTextRange] ?? []
         for selection in selections {
-            let indices: [Int] = Array(selection.start.line ... selection.end.line)
-            let indexSetOfSelectedCode = IndexSet(integersIn: selection.start.line ... selection.end.line)
+            let indices: [Int] = Array(selection.start.line ... selection.end.line - 1)
+            let indexSetOfSelectedCode = IndexSet(integersIn: selection.start.line ... selection.end.line - 1)
 
             // Get selected text
             var selectedText = ""

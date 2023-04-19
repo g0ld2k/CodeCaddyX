@@ -21,7 +21,7 @@ public class OpenAIConnector: ObservableObject {
     /// This is what stores your messages. You can see how to use it in a SwiftUI view here:
     @Published public var messageLog: [[String: String]] = [
         /// Modify this to change the personality of the assistant.
-        ["role": "system", "content": "You're a snarky assistant who acts like a senior developer providing feedback to other senior developers."],
+        ["role": "system", "content": "You're a friendly, helpful assistant"],
     ]
 
     public init() { }

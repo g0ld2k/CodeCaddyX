@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>codecaddyx</string>
-			</array>
-		</dict>
-	</array>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>codecaddyx</string>
+            </array>
+            <key>CFBundleURLName</key>
+            <string>com.g0ld2k.codecaddyx</string>
+        </dict>
+    </array>
 </dict>
 </plist>

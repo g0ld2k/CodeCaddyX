@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct CodeCaddyX_App: App {
+    @NSApplicationDelegateAdaptor var delegate: CodeCaddyAppDelegate
+
     var body: some Scene {
-        WindowGroup {
+        Window("CodeCaddy", id: "main") {
             ContentView()
+                .environmentObject(delegate.incomingCommandHandler)
         }
     }
 }
