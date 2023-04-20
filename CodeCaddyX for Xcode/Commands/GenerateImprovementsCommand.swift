@@ -5,9 +5,9 @@
 //  Created by Chris Golding on 2023-04-13.
 // --------------------------------------------------------------------------
 
+import AppKit
 import Foundation
 import XcodeKit
-import AppKit
 
 class GenerateImprovementsCommand: BaseCommand {
     override func perform(with invocation: XCSourceEditorCommandInvocation) async throws {
@@ -66,7 +66,6 @@ class GenerateImprovementsCommand: BaseCommand {
                     NSWorkspace.shared.open(url)
                 }
             }
-
         }
     }
 }

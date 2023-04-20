@@ -1,12 +1,16 @@
+// -------------------------------------------------------------------------
+//  RememberCommand.swift
+//  CodeCaddy
+//
+//  Created by Chris Golding on 2023-04-19.
+// -------------------------------------------------------------------------
 
-
+import AppKit
 import Foundation
 import XcodeKit
-import AppKit
 
 class RememberCommand: BaseCommand {
     override func perform(with invocation: XCSourceEditorCommandInvocation) async throws {
-
         let lines = invocation.buffer.lines as? [String] ?? []
 
         let selections = invocation.buffer.selections as? [XCSourceTextRange] ?? []
@@ -27,7 +31,6 @@ class RememberCommand: BaseCommand {
                     NSWorkspace.shared.open(url)
                 }
             }
-
         }
     }
 }

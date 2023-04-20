@@ -5,21 +5,21 @@
 //  Created by Chris Golding on 2023-04-13.
 // -------------------------------------------------------------------------
 
-import SwiftUI
 import CodeCaddyShared
 import MarkdownUI
+import SwiftUI
 
 struct SettingsView: View {
     @State private var openAiApiKey: String = ""
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
-    
+
     private enum Constants {
         enum Keys {
             static let openAIAPIKey = "openAIAPIKey"
         }
     }
-    
+
     var body: some View {
         VStack {
             Text("Open AI API Key:")
@@ -31,13 +31,13 @@ struct SettingsView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
-            .onAppear() {
+            .onAppear {
                 loadApiKey()
             }
         }
         .padding()
     }
-    
+
     private func saveApiKey() {
         Task.init {
             do {
@@ -48,7 +48,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     private func loadApiKey() {
         Task.init {
             do {
@@ -59,7 +59,7 @@ struct SettingsView: View {
             } catch KeychainError.dataConversionFailed {
                 alertMessage = "Keychain Error: Failed to convert data to the desired format."
                 showAlert = true
-            } catch KeychainError.unexpectedStatus(let status) {
+            } catch let KeychainError.unexpectedStatus(status) {
                 alertMessage = "Keychain Error: Unexpected error status: \(status)"
                 showAlert = true
             } catch {
@@ -74,46 +74,43 @@ struct OutputView: View {
     @EnvironmentObject var incomingCommandHandler: IncomingCommandHandler
 
     var body: some View {
-
-            if incomingCommandHandler.isExecuting {
-                ProgressView("Asking ChatGPT...")
-            } else {
-                HStack {
-                    ScrollView {
-                        VStack {
-                            HStack {
-                                Text("Input:")
-                                Spacer()
-                            }
-                            .font(.headline)
-
-                            Markdown(incomingCommandHandler.commandInput)
-                                .textSelection(.enabled)
+        if incomingCommandHandler.isExecuting {
+            ProgressView("Asking ChatGPT...")
+        } else {
+            HStack {
+                ScrollView {
+                    VStack {
+                        HStack {
+                            Text("Input:")
                             Spacer()
                         }
+                        .font(.headline)
+
+                        Markdown(incomingCommandHandler.commandInput)
+                            .textSelection(.enabled)
+                        Spacer()
                     }
-                    .padding()
-
-
-                    Divider()
-
-                    ScrollView {
-                        VStack {
-                            HStack {
-                                Text("Output:")
-                                Spacer()
-                            }
-                            .font(.headline)
-
-                            Markdown(incomingCommandHandler.commandOutput)
-                                .textSelection(.enabled)
-                            Spacer()
-                        }
-                    }
-                    .padding()
                 }
-            }
+                .padding()
 
+                Divider()
+
+                ScrollView {
+                    VStack {
+                        HStack {
+                            Text("Output:")
+                            Spacer()
+                        }
+                        .font(.headline)
+
+                        Markdown(incomingCommandHandler.commandOutput)
+                            .textSelection(.enabled)
+                        Spacer()
+                    }
+                }
+                .padding()
+            }
+        }
     }
 }
 

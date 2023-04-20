@@ -5,9 +5,9 @@
 //  Created by Chris Golding on 2023-04-13.
 // --------------------------------------------------------------------------
 
+import AppKit
 import Foundation
 import XcodeKit
-import AppKit
 
 class GenerateUnitTestsCommand: BaseCommand {
     override func perform(with invocation: XCSourceEditorCommandInvocation) async throws {
@@ -35,7 +35,6 @@ class GenerateUnitTestsCommand: BaseCommand {
                     NSWorkspace.shared.open(url)
                 }
             }
-
         }
     }
 }

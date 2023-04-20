@@ -5,9 +5,9 @@
 //  Created by Chris Golding on 2023-04-13.
 // --------------------------------------------------------------------------
 
+import AppKit
 import Foundation
 import XcodeKit
-import AppKit
 
 class ExplainCommand: BaseCommand {
     override func perform(with invocation: XCSourceEditorCommandInvocation) async throws {
@@ -40,7 +40,6 @@ class ExplainCommand: BaseCommand {
                     NSWorkspace.shared.open(url)
                 }
             }
-
         }
     }
 }

@@ -22,7 +22,6 @@ public enum KeychainKeys {
 }
 
 public class KeychainService {
-
     public static let shared = KeychainService()
 
     private let service = "com.g0ld2k.CodeCaddyX"
@@ -68,7 +67,7 @@ public class KeychainService {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: secretKey,
             kSecAttrService as String: service,
-            kSecValueData as String: keyData
+            kSecValueData as String: keyData,
         ]
 
         SecItemDelete(query as CFDictionary)
@@ -85,7 +84,7 @@ public class KeychainService {
             kSecAttrAccount as String: secretKey,
             kSecAttrService as String: service,
             kSecReturnData as String: kCFBooleanTrue!,
-            kSecMatchLimit as String: kSecMatchLimitOne
+            kSecMatchLimit as String: kSecMatchLimitOne,
         ]
 
         var dataTypeRef: AnyObject?
@@ -108,7 +107,7 @@ public class KeychainService {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: secretKey,
-            kSecAttrService as String: service
+            kSecAttrService as String: service,
         ]
 
         let status = SecItemDelete(query as CFDictionary)
@@ -117,4 +116,3 @@ public class KeychainService {
         }
     }
 }
-

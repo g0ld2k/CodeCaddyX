@@ -24,10 +24,9 @@ public class OpenAIConnector: ObservableObject {
         ["role": "system", "content": "You're a friendly, helpful assistant"],
     ]
 
-    public init() { }
+    public init() {}
 
     public func sendToAssistant() async throws {
-
         guard let apiKey = try? await KeychainService.shared.load(secretKey: KeychainKeys.openAIAPIKey) else {
             print("API Key Not Found")
             return
@@ -95,9 +94,9 @@ extension OpenAIConnector {
     }
 }
 
-extension OpenAIConnector {
+public extension OpenAIConnector {
     /// This function makes it simpler to append items to messageLog.
-    public func logMessage(_ message: String, messageUserType: MessageUserType) {
+    func logMessage(_ message: String, messageUserType: MessageUserType) {
         var messageUserTypeString = ""
         switch messageUserType {
         case .user:
@@ -109,7 +108,7 @@ extension OpenAIConnector {
         messageLog.append(["role": messageUserTypeString, "content": message])
     }
 
-    public enum MessageUserType {
+    enum MessageUserType {
         case user
         case assistant
     }

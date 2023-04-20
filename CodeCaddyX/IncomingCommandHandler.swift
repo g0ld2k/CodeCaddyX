@@ -1,6 +1,12 @@
+// -------------------------------------------------------------------------
+//  IncomingCommandHandler.swift
+//  CodeCaddy
+//
+//  Created by Chris Golding on 2023-04-19.
+// -------------------------------------------------------------------------
 
-import Foundation
 import CodeCaddyShared
+import Foundation
 
 class IncomingCommandHandler: ObservableObject {
     @Published var commandOutput: String = ""
@@ -29,11 +35,9 @@ class IncomingCommandHandler: ObservableObject {
                 Task.init {
                     apiService.logMessage("\(commandText)\n\(decodedCodeString)", messageUserType: .user)
 
-
                     DispatchQueue.main.async { [weak self] in
                         self?.isExecuting = true
                     }
-
 
                     try await apiService.sendToAssistant()
 
@@ -58,23 +62,23 @@ class IncomingCommandHandler: ObservableObject {
         switch commandRequest {
         case "explain":
             return """
-                Create a response using Markdown that explains the code below.
-"""
+                            Create a response using Markdown that explains the code below.
+            """
         case "codeReview":
             return """
-How can the code below be better, let me know:
-* How can it be improved to make it more readable, testable, and reduce bugs?
-* Does it make logical sense?
-* Are there any edge cases that have not been handled properly?
-* Provide examples of the code with fixes applied
+            How can the code below be better, let me know:
+            * How can it be improved to make it more readable, testable, and reduce bugs?
+            * Does it make logical sense?
+            * Are there any edge cases that have not been handled properly?
+            * Provide examples of the code with fixes applied
 
-The response should be in markdown (but don't mention you are using markdown) and add a header to the output saying this is a code review.
-"""
+            The response should be in markdown (but don't mention you are using markdown) and add a header to the output saying this is a code review.
+            """
 //            return "How can I improve the code below?"
         case "unitTests":
             return """
-Create unit tests for the code below. Ensure all edge cases are covered and let me know if anything can't be tested.
-"""
+            Create unit tests for the code below. Ensure all edge cases are covered and let me know if anything can't be tested.
+            """
         default:
             return nil
         }

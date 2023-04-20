@@ -5,9 +5,9 @@
 //  Created by Chris Golding on 2023-04-13.
 // --------------------------------------------------------------------------
 
+import CodeCaddyShared
 import Foundation
 import XcodeKit
-import CodeCaddyShared
 
 class BaseCommand: NSObject, XCSourceEditorCommand {
     enum CommandResult {
