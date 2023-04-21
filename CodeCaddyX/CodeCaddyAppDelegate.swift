@@ -10,7 +10,6 @@ import Foundation
 import SwiftUI
 
 class CodeCaddyAppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
-
     let incomingCommandHandler = IncomingCommandHandler()
 
     func applicationWillFinishLaunching(_: Notification) {

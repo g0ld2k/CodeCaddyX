@@ -15,45 +15,48 @@ class IncomingCommandHandler: ObservableObject {
     @Published var isExecuting: Bool = false
 
     func handleIncomingURL(_ url: URL) {
-        if url.scheme == "codecaddyx" {
-            if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-               let codeParam = components.queryItems?.first(where: { $0.name == "code" }),
-               let encodedCodeString = codeParam.value,
-               let decodedCodeString = encodedCodeString.removingPercentEncoding,
-               let commandParam = components.queryItems?.first(where: { $0.name == "command" }),
-               let decodedCommandString = commandParam.value?.removingPercentEncoding
-            {
-                print("Decoded code string: \(decodedCodeString)")
+        guard url.scheme == "codecaddyx" else {
+            return
+        }
 
-                guard let commandText = getCommandFromText(decodedCommandString) else {
-                    commandOutput = "Something went wrong, maybe your command isn't supported?"
-                    return
-                }
-                commandInput = "```\n" + decodedCodeString + "\n```"
-                let apiService = OpenAIConnector()
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let codeParam = components.queryItems?.first(where: { $0.name == "code" }),
+              let encodedCodeString = codeParam.value,
+              let decodedCodeString = encodedCodeString.removingPercentEncoding,
+              let commandParam = components.queryItems?.first(where: { $0.name == "command" }),
+              let decodedCommandString = commandParam.value?.removingPercentEncoding
+        else {
+            return
+        }
+        print("Decoded code string: \(decodedCodeString)")
 
-                Task.init {
-                    apiService.logMessage("\(commandText)\n\(decodedCodeString)", messageUserType: .user)
+        guard let commandText = getCommandFromText(decodedCommandString) else {
+            commandOutput = "Something went wrong, maybe your command isn't supported?"
+            return
+        }
+        commandInput = "```\n" + decodedCodeString + "\n```"
+        let apiService = OpenAIConnector()
 
-                    DispatchQueue.main.async { [weak self] in
-                        self?.isExecuting = true
-                    }
+        Task.init {
+            apiService.logMessage("\(commandText)\n\(decodedCodeString)", messageUserType: .user)
 
-                    try await apiService.sendToAssistant()
+            DispatchQueue.main.async { [weak self] in
+                self?.isExecuting = true
+            }
 
-                    DispatchQueue.main.async { [weak self] in
-                        self?.isExecuting = false
-                    }
+            try await apiService.sendToAssistant()
 
-                    guard let latestMessage = apiService.messageLog.last else {
-                        commandOutput = "That's funny OpenAI didn't send us anything back..."
-                        return
-                    }
+            DispatchQueue.main.async { [weak self] in
+                self?.isExecuting = false
+            }
 
-                    DispatchQueue.main.async { [weak self] in
-                        self?.commandOutput = latestMessage["content"] ?? "Missing"
-                    }
-                }
+            guard let latestMessage = apiService.messageLog.last else {
+                commandOutput = "That's funny OpenAI didn't send us anything back..."
+                return
+            }
+
+            DispatchQueue.main.async { [weak self] in
+                self?.commandOutput = latestMessage["content"] ?? "Missing"
             }
         }
     }
@@ -74,7 +77,6 @@ class IncomingCommandHandler: ObservableObject {
 
             The response should be in markdown (but don't mention you are using markdown) and add a header to the output saying this is a code review.
             """
-//            return "How can I improve the code below?"
         case "unitTests":
             return """
             Create unit tests for the code below. Ensure all edge cases are covered and let me know if anything can't be tested.
