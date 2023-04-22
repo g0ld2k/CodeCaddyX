@@ -8,8 +8,14 @@
 import MarkdownUI
 import SwiftUI
 
+/**
+ A view that displays a title and a Markdown-formatted text as its body.
+ */
 struct MarkdownViewerView: View {
+    /// The title to be displayed above the Markdown text.
     var title: String
+
+    /// A binding to the Markdown-formatted text to be displayed.
     @Binding var text: String
 
     var body: some View {
@@ -20,6 +26,7 @@ struct MarkdownViewerView: View {
             }
             .font(.headline)
 
+            /// Displays the Markdown-formatted text with text selection enabled.
             Markdown(text)
                 .textSelection(.enabled)
 

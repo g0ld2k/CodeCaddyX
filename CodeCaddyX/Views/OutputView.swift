@@ -9,9 +9,10 @@ import MarkdownUI
 import SwiftUI
 
 /**
- Represents the output view controller for displaying incoming commands.
+ The `OutputView` struct is responsible for displaying incoming command requests. It contains two scrollable views, one for input and one for output. It also shows a progress view when an incoming command is being executed.
  */
-struct OutputView: View {
+ struct OutputView: View {
+    
     /**
      The environment object representing incoming command requests.
      */
@@ -19,8 +20,10 @@ struct OutputView: View {
 
     // MARK: - Constants
 
-    private let inputTitle = "Input"
-    private let outputTitle = "Output"
+    private enum Constants {
+        static let inputTitle = "Input"
+        static let outputTitle = "Output"
+    }
 
     // MARK: - Views
 
@@ -33,15 +36,37 @@ struct OutputView: View {
     }
 
     /**
-     The main body of the `OutputView` which contains two scrollable views, one for input and one for output.
+     The `mainView` contains two scrollable views, one for input and one for output.
      */
     private var mainView: some View {
         HStack {
-            scrollableView(title: inputTitle, text: $incomingCommandHandler.commandInput)
-
+            inputView
             Divider()
+            outputView
+        }
+    }
 
-            scrollableView(title: outputTitle, text: $incomingCommandHandler.commandOutput)
+    /**
+     The `inputView` contains input title and an input scrollable view of `MarkdownViewerView`.
+     */
+    private var inputView: some View {
+        VStack {
+            Text(Constants.inputTitle)
+            ScrollableView {
+                MarkdownViewerView(title: "", text: $incomingCommandHandler.commandInput)
+            }
+        }
+    }
+
+    /**
+     The `outputView` contains output title and an output scrollable view of `MarkdownViewerView`.
+     */
+    private var outputView: some View {
+        VStack {
+            Text(Constants.outputTitle)
+            ScrollableView {
+                MarkdownViewerView(title: "", text: $incomingCommandHandler.commandOutput)
+            }
         }
     }
 
@@ -49,7 +74,7 @@ struct OutputView: View {
 
     /**
      Returns a scrollable view representing a title and corresponding text for the `OutputView`.
-
+     
      - Parameter title: The title for the corresponding parameter `text`.
      - Parameter text: The text to display in a scrollable view for the corresponding `title`.
      - Returns: A `scrollableView` containing a `title` and corresponding `text` within a `MarkdownViewerView`.

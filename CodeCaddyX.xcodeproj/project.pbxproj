@@ -173,7 +173,9 @@
 			children = (
 				E11463A329E8322F00B79D74 /* ContentView.swift */,
 				83C7862629F22A6F00F9294D /* MarkdownViewerView.swift */,
+				83C7862129F1DD3300F9294D /* OutputView.swift */,
 				83C7862429F22A1700F9294D /* ScrollableView.swift */,
+				83C7861F29F1DB7C00F9294D /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -210,8 +212,6 @@
 				E11463A729E8323300B79D74 /* Preview Content */,
 				E1AB944729F070DF006C3AC4 /* CodeCaddyAppDelegate.swift */,
 				E1AB945129F08EA5006C3AC4 /* IncomingCommandHandler.swift */,
-				83C7861F29F1DB7C00F9294D /* SettingsView.swift */,
-				83C7862129F1DD3300F9294D /* OutputView.swift */,
 			);
 			path = CodeCaddyX;
 			sourceTree = "<group>";
