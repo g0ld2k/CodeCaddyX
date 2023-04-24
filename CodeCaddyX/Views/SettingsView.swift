@@ -8,6 +8,9 @@
 import CodeCaddyShared
 import SwiftUI
 
+/**
+ A view for managing user settings, including Open AI API key.
+ */
 struct SettingsView: View {
     // MARK: Properties
 
@@ -45,17 +48,10 @@ struct SettingsView: View {
 
     // MARK: Actions
 
+    /**
+     Saves user's Open AI API key in keychain.
+     */
     private func saveApiKey() {
-        save()
-    }
-
-    private func loadApiKey() {
-        load()
-    }
-
-    // MARK: Private Functions
-
-    private func save() {
         guard !openAiApiKey.isEmpty else {
             alertMessage = "Please enter Open AI API"
             showAlert = true
@@ -72,7 +68,10 @@ struct SettingsView: View {
         }
     }
 
-    private func load() {
+    /**
+     Loads user's Open AI API key from keychain.
+     */
+    private func loadApiKey() {
         Task.init {
             do {
                 let apiKey = try await KeychainService.shared.load(secretKey: Constants.Keys.openAIAPIKey)

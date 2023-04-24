@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8358DB3629F4DC2900C6821E /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8358DB3529F4DC2900C6821E /* CommandType.swift */; };
 		83A11A1429F0F6F30047965F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 83A11A1329F0F6F30047965F /* MarkdownUI */; };
 		83BBF99A29EDBDFD00BDAF58 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBF99929EDBDFD00BDAF58 /* Secrets.swift */; };
 		83C7862029F1DB7C00F9294D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C7861F29F1DB7C00F9294D /* SettingsView.swift */; };
@@ -36,7 +37,7 @@
 		E1AB944229F040B9006C3AC4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AB944129F040B9006C3AC4 /* Security.framework */; };
 		E1AB944429F04143006C3AC4 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB943F29F039E3006C3AC4 /* KeychainService.swift */; };
 		E1AB944529F0628C006C3AC4 /* OpenAIConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659929E8454E002D881C /* OpenAIConnector.swift */; };
-		E1AB944629F062A3006C3AC4 /* OpenAIResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659729E8450D002D881C /* OpenAIResponseHandler.swift */; };
+		E1AB944629F062A3006C3AC4 /* OpenAIResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162659729E8450D002D881C /* OpenAIResponseDecoder.swift */; };
 		E1AB944829F070DF006C3AC4 /* CodeCaddyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB944729F070DF006C3AC4 /* CodeCaddyAppDelegate.swift */; };
 		E1AB945229F08EA5006C3AC4 /* IncomingCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AB945129F08EA5006C3AC4 /* IncomingCommandHandler.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8358DB3529F4DC2900C6821E /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
 		83BBF99929EDBDFD00BDAF58 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		83C7861F29F1DB7C00F9294D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		83C7862129F1DD3300F9294D /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
@@ -121,7 +123,7 @@
 		E11463BD29E832C600B79D74 /* ExplainCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainCommand.swift; sourceTree = "<group>"; };
 		E11463BF29E832C600B79D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11463C029E832C600B79D74 /* CodeCaddyX for Xcode.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CodeCaddyX for Xcode.entitlements"; sourceTree = "<group>"; };
-		E162659729E8450D002D881C /* OpenAIResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIResponseHandler.swift; sourceTree = "<group>"; };
+		E162659729E8450D002D881C /* OpenAIResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIResponseDecoder.swift; sourceTree = "<group>"; };
 		E162659929E8454E002D881C /* OpenAIConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIConnector.swift; sourceTree = "<group>"; };
 		E162659B29E85BEC002D881C /* AddCommentsToCodeCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentsToCodeCommand.swift; sourceTree = "<group>"; };
 		E162659E29E88CB4002D881C /* GenerateUnitTestsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateUnitTestsCommand.swift; sourceTree = "<group>"; };
@@ -168,12 +170,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8358DB3329F47A8B00C6821E /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				E1AB945129F08EA5006C3AC4 /* IncomingCommandHandler.swift */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
+		8358DB3429F4DC1900C6821E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				8358DB3529F4DC2900C6821E /* CommandType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		83C7862329F229E000F9294D /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				E11463A329E8322F00B79D74 /* ContentView.swift */,
 				83C7862629F22A6F00F9294D /* MarkdownViewerView.swift */,
+				83C7862129F1DD3300F9294D /* OutputView.swift */,
 				83C7862429F22A1700F9294D /* ScrollableView.swift */,
+				83C7861F29F1DB7C00F9294D /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,16 +222,14 @@
 		E11463A029E8322F00B79D74 /* CodeCaddyX */ = {
 			isa = PBXGroup;
 			children = (
-				83C7862329F229E000F9294D /* Views */,
+				E11463AA29E8323300B79D74 /* CodeCaddyX.entitlements */,
 				E1AB942A29EE1703006C3AC4 /* Info.plist */,
+				E1AB944729F070DF006C3AC4 /* CodeCaddyAppDelegate.swift */,
 				E11463A129E8322F00B79D74 /* CodeCaddyX_App.swift */,
 				E11463A529E8323300B79D74 /* Assets.xcassets */,
-				E11463AA29E8323300B79D74 /* CodeCaddyX.entitlements */,
+				8358DB3329F47A8B00C6821E /* Handlers */,
 				E11463A729E8323300B79D74 /* Preview Content */,
-				E1AB944729F070DF006C3AC4 /* CodeCaddyAppDelegate.swift */,
-				E1AB945129F08EA5006C3AC4 /* IncomingCommandHandler.swift */,
-				83C7861F29F1DB7C00F9294D /* SettingsView.swift */,
-				83C7862129F1DD3300F9294D /* OutputView.swift */,
+				83C7862329F229E000F9294D /* Views */,
 			);
 			path = CodeCaddyX;
 			sourceTree = "<group>";
@@ -257,7 +275,7 @@
 		E162659629E84501002D881C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E162659729E8450D002D881C /* OpenAIResponseHandler.swift */,
+				E162659729E8450D002D881C /* OpenAIResponseDecoder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,6 +296,7 @@
 		E1AB943329F039C2006C3AC4 /* CodeCaddyShared */ = {
 			isa = PBXGroup;
 			children = (
+				8358DB3429F4DC1900C6821E /* Enums */,
 				E162659629E84501002D881C /* Model */,
 				E1AB943E29F039D0006C3AC4 /* Services */,
 				E1AB943429F039C2006C3AC4 /* CodeCaddyShared.h */,
@@ -476,7 +495,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1AB944429F04143006C3AC4 /* KeychainService.swift in Sources */,
-				E1AB944629F062A3006C3AC4 /* OpenAIResponseHandler.swift in Sources */,
+				8358DB3629F4DC2900C6821E /* CommandType.swift in Sources */,
+				E1AB944629F062A3006C3AC4 /* OpenAIResponseDecoder.swift in Sources */,
 				E1AB944529F0628C006C3AC4 /* OpenAIConnector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -636,12 +656,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CodeCaddyX/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CodeCaddy;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 Chris Golding.  All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -668,12 +689,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CodeCaddyX/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CodeCaddy;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2023 Chris Golding.  All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -702,7 +724,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy.CodeCaddyforXcode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -733,7 +755,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy.CodeCaddyforXcode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

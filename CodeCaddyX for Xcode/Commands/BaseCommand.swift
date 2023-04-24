@@ -8,6 +8,7 @@
 import CodeCaddyShared
 import Foundation
 import XcodeKit
+import AppKit
 
 class BaseCommand: NSObject, XCSourceEditorCommand {
     enum CommandResult {
@@ -27,7 +28,7 @@ class BaseCommand: NSObject, XCSourceEditorCommand {
         assertionFailure("This command should not be used directly.  Subclass it and use the appropriate methods")
     }
 
-    func performSelectionCommand(with invocation: XCSourceEditorCommandInvocation, command: String, resultType: CommandResult, isComment: Bool = true) async throws {
+    func performSelectionCommand(with invocation: XCSourceEditorCommandInvocation, command: String, resultType: CommandResult, isComment: Bool = true, remember: Bool = false) async throws {
         let lines = invocation.buffer.lines as? [String] ?? []
 
         let selections = invocation.buffer.selections as? [XCSourceTextRange] ?? []
@@ -63,7 +64,36 @@ class BaseCommand: NSObject, XCSourceEditorCommand {
             case .bottom:
                 invocation.buffer.lines.add(contentForXcode)
             }
+            
+            if remember == false {
+                apiService.flushLog()
+            }
+            
             return
+        }
+    }
+    
+    func performInCompanionApp(with invocation: XCSourceEditorCommandInvocation, command: CommandType, remember: Bool = false) async throws {
+        let lines = invocation.buffer.lines as? [String] ?? []
+
+        let selections = invocation.buffer.selections as? [XCSourceTextRange] ?? []
+        for selection in selections {
+            let indices: [Int] = Array(selection.start.line ... selection.end.line)
+
+            // Get selected text
+            var selectedText = ""
+            for i in 0 ..< indices.count {
+                guard lines.count > indices[i] else { break }
+                selectedText += lines[indices[i]]
+            }
+
+            if let encodedCodeString = selectedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                let customURLString = "codecaddyx://receiveCode?command=\(command.rawValue)&code=\(encodedCodeString)&remember=\(remember)"
+                if let url = URL(string: customURLString) {
+                    // Open the URL to launch the other app
+                    NSWorkspace.shared.open(url)
+                }
+            }
         }
     }
 

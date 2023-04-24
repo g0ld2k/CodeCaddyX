@@ -12,23 +12,35 @@ import Foundation
 
 public enum OpenAIConnectorError: Error {
     case apiKeyNotFound
+    case badData(reason: String)
+    case badJson(reason: String)
+    case badParsing(reason: String)
 }
 
 public class OpenAIConnector: ObservableObject {
-    /// This URL might change in the future, so if you get an error, make sure to check the OpenAI API Reference.
-    let openAIURL = URL(string: "https://api.openai.com/v1/chat/completions")
+    private enum Constants {
+        static let urlString = "https://api.openai.com/v1/chat/completions"
+        static let model = "gpt-3.5-turbo"
+    }
 
-    /// This is what stores your messages. You can see how to use it in a SwiftUI view here:
-    @Published public var messageLog: [[String: String]] = [
+    /// This URL might change in the future, so if you get an error, make sure to check the OpenAI API Reference.
+    let openAIURL = URL(string: Constants.urlString)
+    
+    private let defaultMessageLog = [
         /// Modify this to change the personality of the assistant.
         ["role": "system", "content": "You're a friendly, helpful assistant"],
     ]
 
-    public init() {}
+    /// This is what stores your messages. You can see how to use it in a SwiftUI view here:
+    @Published public var messageLog: [[String: String]]
+
+    public init() {
+        messageLog = defaultMessageLog
+    }
 
     public func sendToAssistant() async throws {
         guard let apiKey = try? await KeychainService.shared.load(secretKey: KeychainKeys.openAIAPIKey) else {
-            print("API Key Not Found")
+            logMessage("Error: API Key Not Found.  Please add it in the settings of the CodeCaddyX app.", messageUserType: .assistant)
             return
         }
 
@@ -36,10 +48,11 @@ public class OpenAIConnector: ObservableObject {
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.timeoutInterval = 120 // set timeout to 60 seconds
 
         let httpBody: [String: Any] = [
             /// In the future, you can use a different chat model here.
-            "model": "gpt-3.5-turbo",
+            "model": Constants.model,
             "messages": messageLog,
         ]
 
@@ -48,29 +61,36 @@ public class OpenAIConnector: ObservableObject {
         do {
             httpBodyJson = try JSONSerialization.data(withJSONObject: httpBody, options: .prettyPrinted)
         } catch {
-            print("Unable to convert to JSON \(error)")
-            logMessage("error", messageUserType: .assistant)
+            logMessage("Unable to convert to JSON \(error)", messageUserType: .assistant)
         }
 
         request.httpBody = httpBodyJson
 
         do {
-            if let requestData = try await executeRequest(request: request, withSessionConfig: nil) {
-                let jsonStr = String(data: requestData, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!
-                print(jsonStr)
-                let responseHandler = OpenAIResponseHandler()
-                if let messageContent = responseHandler.decodeJson(jsonString: jsonStr)?.choices[0].message["content"] {
-                    logMessage(messageContent, messageUserType: .assistant)
-                }
+            guard let responseData = try await executeRequest(request: request, withSessionConfig: nil) else {
+                throw OpenAIConnectorError.badData(reason: "Couldn't retrieve data")
             }
+
+            guard let jsonString = String(data: responseData, encoding: .utf8) else {
+                throw OpenAIConnectorError.badData(reason: "Couldn't convert data to string")
+            }
+
+            let responseHandler = OpenAIResponseDecoder()
+            guard let content = responseHandler.decodeJSON(jsonString: jsonString)?.choices.first?.message["content"] else {
+                throw OpenAIConnectorError.badParsing(reason: "Couldn't parse message content")
+            }
+
+            logMessage(content, messageUserType: .assistant)
+        } catch let error as NSError {
+            logMessage("Error: \(error.localizedDescription)", messageUserType: .assistant)
+        } catch let openAIConnectorError as OpenAIConnectorError {
+            logMessage("Error: \(openAIConnectorError.localizedDescription)", messageUserType: .assistant)
         } catch {
-            print("Error: \(error.localizedDescription)")
-            logMessage("error", messageUserType: .assistant)
+            logMessage("Unknown error occurred", messageUserType: .assistant)
         }
     }
 }
 
-/// Don't worry about this too much. This just gets rid of errors when using messageLog in a SwiftUI List or ForEach.
 extension Dictionary: Identifiable { public var id: UUID { UUID() } }
 extension Array: Identifiable { public var id: UUID { UUID() } }
 extension String: Identifiable { public var id: UUID { UUID() } }
@@ -95,21 +115,17 @@ extension OpenAIConnector {
 }
 
 public extension OpenAIConnector {
-    /// This function makes it simpler to append items to messageLog.
+    
     func logMessage(_ message: String, messageUserType: MessageUserType) {
-        var messageUserTypeString = ""
-        switch messageUserType {
-        case .user:
-            messageUserTypeString = "user"
-        case .assistant:
-            messageUserTypeString = "assistant"
-        }
-
-        messageLog.append(["role": messageUserTypeString, "content": message])
+        messageLog.append(["role": messageUserType.rawValue, "content": message])
     }
 
-    enum MessageUserType {
+    enum MessageUserType: String {
         case user
         case assistant
+    }
+    
+    func flushLog() {
+        messageLog = defaultMessageLog
     }
 }
