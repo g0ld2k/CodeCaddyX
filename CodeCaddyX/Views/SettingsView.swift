@@ -12,23 +12,22 @@ import SwiftUI
  A view for managing user settings, including Open AI API key.
  */
 struct SettingsView: View {
-    
     // MARK: Properties
-    
+
     @State private var openAiApiKey: String = ""
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
-    
+
     // MARK: Constants
-    
+
     private enum Constants {
         enum Keys {
             static let openAIAPIKey = "openAIAPIKey"
         }
     }
-    
+
     // MARK: Body
-    
+
     var body: some View {
         VStack {
             Text("Open AI API Key:")
@@ -46,9 +45,9 @@ struct SettingsView: View {
         }
         .padding()
     }
-    
+
     // MARK: Actions
-    
+
     /**
      Saves user's Open AI API key in keychain.
      */
@@ -58,7 +57,7 @@ struct SettingsView: View {
             showAlert = true
             return
         }
-        
+
         Task.init {
             do {
                 try await KeychainService.shared.save(secret: openAiApiKey, secretKey: Constants.Keys.openAIAPIKey)
@@ -68,7 +67,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     /**
      Loads user's Open AI API key from keychain.
      */

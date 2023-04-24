@@ -11,8 +11,7 @@ import SwiftUI
 /**
  The `OutputView` struct is responsible for displaying incoming command requests. It contains two scrollable views, one for input and one for output. It also shows a progress view when an incoming command is being executed.
  */
- struct OutputView: View {
-    
+struct OutputView: View {
     /**
      The environment object representing incoming command requests.
      */
@@ -74,7 +73,7 @@ import SwiftUI
 
     /**
      Returns a scrollable view representing a title and corresponding text for the `OutputView`.
-     
+
      - Parameter title: The title for the corresponding parameter `text`.
      - Parameter text: The text to display in a scrollable view for the corresponding `title`.
      - Returns: A `scrollableView` containing a `title` and corresponding `text` within a `MarkdownViewerView`.
