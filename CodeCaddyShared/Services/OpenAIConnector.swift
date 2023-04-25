@@ -25,7 +25,7 @@ public class OpenAIConnector: ObservableObject {
 
     /// This URL might change in the future, so if you get an error, make sure to check the OpenAI API Reference.
     let openAIURL = URL(string: Constants.urlString)
-    
+
     private let defaultMessageLog = [
         /// Modify this to change the personality of the assistant.
         ["role": "system", "content": "You're a friendly, helpful assistant"],
@@ -115,7 +115,6 @@ extension OpenAIConnector {
 }
 
 public extension OpenAIConnector {
-    
     func logMessage(_ message: String, messageUserType: MessageUserType) {
         messageLog.append(["role": messageUserType.rawValue, "content": message])
     }
@@ -124,7 +123,7 @@ public extension OpenAIConnector {
         case user
         case assistant
     }
-    
+
     func flushLog() {
         messageLog = defaultMessageLog
     }

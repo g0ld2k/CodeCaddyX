@@ -5,10 +5,10 @@
 //  Created by Chris Golding on 2023-04-13.
 // --------------------------------------------------------------------------
 
+import AppKit
 import CodeCaddyShared
 import Foundation
 import XcodeKit
-import AppKit
 
 class BaseCommand: NSObject, XCSourceEditorCommand {
     enum CommandResult {
@@ -64,15 +64,15 @@ class BaseCommand: NSObject, XCSourceEditorCommand {
             case .bottom:
                 invocation.buffer.lines.add(contentForXcode)
             }
-            
+
             if remember == false {
                 apiService.flushLog()
             }
-            
+
             return
         }
     }
-    
+
     func performInCompanionApp(with invocation: XCSourceEditorCommandInvocation, command: CommandType, remember: Bool = false) async throws {
         let lines = invocation.buffer.lines as? [String] ?? []
 
@@ -87,7 +87,10 @@ class BaseCommand: NSObject, XCSourceEditorCommand {
                 selectedText += lines[indices[i]]
             }
 
-            if let encodedCodeString = selectedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let base64CodeString = selectedText.data(using: .utf8)?.base64EncodedString(),
+               let encodedCodeString = base64CodeString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            {
+                print("Selected text:\n\(selectedText)")
                 let customURLString = "codecaddyx://receiveCode?command=\(command.rawValue)&code=\(encodedCodeString)&remember=\(remember)"
                 if let url = URL(string: customURLString) {
                     // Open the URL to launch the other app

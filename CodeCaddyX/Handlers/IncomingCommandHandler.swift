@@ -26,7 +26,7 @@ struct Command {
 class IncomingCommandHandler: ObservableObject {
     @Published var commandOutput: String = ""
     @Published var commandInput: String = ""
-    @Published var command: String = ""
+    @Published var command: CommandType?
     @Published var isExecuting: Bool = false
 
     private enum Constants {
@@ -37,6 +37,22 @@ class IncomingCommandHandler: ObservableObject {
             static let remember = "remember"
         }
     }
+
+    private let commands: [CommandType: String] = [
+        .explain: "Create a response using Markdown that explains the code below.",
+        .codeReview: """
+            How can the code below be better, let me know:
+            * How can it be improved to make it more readable, testable, and reduce bugs?
+            * Does it make logical sense?
+            * Are there any edge cases that have not been handled properly?
+            * Provide examples of the code with fixes applied
+
+            The response should be in markdown (but don't mention you are using markdown) and add a header to the output saying this is a code review.
+        """,
+        .unitTests: """
+            Create unit tests for the code below. Ensure all edge cases are covered and let me know if anything can't be tested.
+        """,
+    ]
 
     private let openAIConnector = OpenAIConnector()
 
@@ -50,24 +66,23 @@ class IncomingCommandHandler: ObservableObject {
         guard url.scheme == Constants.urlScheme,
               let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let codeParam = components.queryItems?.first(where: { $0.name == Constants.Params.code }),
-              let encodedCodeString = codeParam.value,
-              let decodedCodeString = encodedCodeString.removingPercentEncoding,
+              let encodedBase64CodeString = codeParam.value?.removingPercentEncoding,
+              let dataFromCodeString = Data(base64Encoded: encodedBase64CodeString),
+              let decodedCodeString = String(data: dataFromCodeString, encoding: .utf8),
               let commandParam = components.queryItems?.first(where: { $0.name == Constants.Params.command }),
-              let decodedCommandString = commandParam.value?.removingPercentEncoding
+              let decodedCommandString = commandParam.value?.removingPercentEncoding,
+              let commandType = CommandType(rawValue: decodedCommandString)
         else {
             return
         }
-        
-        let rememberMessage: Bool
-        if let rememberParam = components.queryItems?.first(where: { $0.name == Constants.Params.remember }),
-           let rawValue = rememberParam.value,
-           let value = Bool(rawValue) {
-            rememberMessage = value
-        } else {
-            rememberMessage = false
-        }
 
-        handleCommand(decodedCodeString, decodedCommandString)
+        handleCommand(decodedCodeString, commandType, rememberCommand: false)
+    }
+
+    func askQuestion(_ question: String) {
+        openAIConnector.logMessage("\(commandInput)\n\n\(question)", messageUserType: .user)
+
+        sendToAPI()
     }
 
     /**
@@ -77,17 +92,38 @@ class IncomingCommandHandler: ObservableObject {
         - decodedCodeString: The decoded code string.
         - commandString: The decoded command string.
      */
-    private func handleCommand(_ decodedCodeString: String, _ commandString: String?, rememberCommand: Bool = false) {
-        guard let commandText = getCommandFromText(commandString) else {
+    private func handleCommand(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand: Bool = false) {
+        switch commandType {
+        case .explain, .codeReview, .unitTests:
+            handleClosedCommand(decodedCodeString, commandType, rememberCommand: rememberCommand)
+        case .ask:
+            handleOpenEndedCommand(decodedCodeString, commandType, rememberCommand: rememberCommand)
+        }
+    }
+
+    private func handleClosedCommand(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand: Bool = false) {
+        guard let commandText = commands[commandType] else {
             commandOutput = "Something went wrong, maybe your command isn't supported?"
             return
         }
 
+        if rememberCommand == false {
+            openAIConnector.flushLog()
+        }
+
         commandInput = "```\n" + decodedCodeString + "\n```"
 
-        Task.init {
-            openAIConnector.logMessage("\(commandText)\n\(decodedCodeString)", messageUserType: .user)
+        openAIConnector.logMessage("\(commandText)\n\(decodedCodeString)", messageUserType: .user)
 
+        sendToAPI()
+    }
+
+    private func handleOpenEndedCommand(_ decodedCodeString: String, _: CommandType, rememberCommand _: Bool = false) {
+        commandInput = "```\n" + decodedCodeString + "\n```"
+    }
+
+    private func sendToAPI() {
+        Task.init {
             DispatchQueue.main.async { [weak self] in
                 self?.isExecuting = true
             }
@@ -106,41 +142,6 @@ class IncomingCommandHandler: ObservableObject {
             DispatchQueue.main.async { [weak self] in
                 self?.commandOutput = latestMessage["content"] ?? "Missing"
             }
-            
-            if rememberCommand == false {
-                openAIConnector.flushLog()
-            }
         }
-    }
-
-    /**
-     Retrieves the correct command text based on the command request.
-
-     - Parameter:
-        - commandRequest: The command requested.
-
-     - Returns: The correct command text or `nil` if it does not exist.
-     */
-    private func getCommandFromText(_ commandRequest: String?) -> String? {
-        guard let commandRequest,
-              let commandType = CommandType(rawValue: commandRequest) else { return nil }
-
-        let commands = [
-            Command(type: .explain, commandText: "Create a response using Markdown that explains the code below."),
-            Command(type: .codeReview, commandText: """
-            How can the code below be better, let me know:
-            * How can it be improved to make it more readable, testable, and reduce bugs?
-            * Does it make logical sense?
-            * Are there any edge cases that have not been handled properly?
-            * Provide examples of the code with fixes applied
-
-            The response should be in markdown (but don't mention you are using markdown) and add a header to the output saying this is a code review.
-            """),
-            Command(type: .unitTests, commandText: """
-            Create unit tests for the code below. Ensure all edge cases are covered and let me know if anything can't be tested.
-            """),
-        ]
-
-        return commands.first(where: { $0.type == commandType })?.commandText
     }
 }

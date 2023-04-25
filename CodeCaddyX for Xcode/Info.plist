@@ -40,6 +40,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>Generate Unit Tests for Selection</string>
 				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).AskAboutCodeCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).AskAboutCodeCommand</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>Ask About Selection</string>
+				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>$(PRODUCT_MODULE_NAME).SourceEditorExtension</string>

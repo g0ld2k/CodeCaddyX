@@ -5,6 +5,7 @@
 //  Created by Chris Golding on 4/20/23.
 //
 
+import CodeCaddyShared
 import MarkdownUI
 import SwiftUI
 
@@ -16,6 +17,8 @@ struct OutputView: View {
      The environment object representing incoming command requests.
      */
     @EnvironmentObject var incomingCommandHandler: IncomingCommandHandler
+    @State var question: String = ""
+    @State var editorEnabled: Bool = false
 
     // MARK: - Constants
 
@@ -49,10 +52,21 @@ struct OutputView: View {
      The `inputView` contains input title and an input scrollable view of `MarkdownViewerView`.
      */
     private var inputView: some View {
-        VStack {
+        return VStack {
             Text(Constants.inputTitle)
             ScrollableView {
                 MarkdownViewerView(title: "", text: $incomingCommandHandler.commandInput)
+            }
+            HStack {
+                TextEditor(text: $question)
+                Button("Send") {
+                    incomingCommandHandler.askQuestion(question)
+                }
+            }
+
+            .padding()
+            .onChange(of: incomingCommandHandler.command) { _ in
+                editorEnabled = incomingCommandHandler.command == CommandType.ask
             }
         }
     }
