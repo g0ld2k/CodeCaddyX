@@ -13,77 +13,30 @@ import SwiftUI
  The `OutputView` struct is responsible for displaying incoming command requests. It contains two scrollable views, one for input and one for output. It also shows a progress view when an incoming command is being executed.
  */
 struct OutputView: View {
-    /**
-     The environment object representing incoming command requests.
-     */
-    @EnvironmentObject var incomingCommandHandler: IncomingCommandHandler
-    @State var question: String = ""
-    @State var editorEnabled: Bool = false
+    @EnvironmentObject var commandHandler: IncomingCommandHandler
+    @State private var question = ""
+    @State private var editorEnabled = false
+    @State private var questionInputExpanded = true
 
-    // MARK: - Constants
-
-    private enum Constants {
+    private enum Constant {
         static let inputTitle = "Input"
         static let outputTitle = "Output"
-    }
-
-    // MARK: - Views
-
-    var body: some View {
-        if incomingCommandHandler.isExecuting {
-            ProgressView(LocalizedStringKey("Asking ChatGPT..."))
-        } else {
-            mainView
-        }
+        static let buttonWidth: CGFloat = 50
+        static let buttonHeight: CGFloat = 30
+        static let inputViewHeight: CGFloat = 120
     }
 
     /**
      The `mainView` contains two scrollable views, one for input and one for output.
      */
     private var mainView: some View {
+
         HStack {
             inputView
             Divider()
             outputView
         }
     }
-
-    /**
-     The `inputView` contains input title and an input scrollable view of `MarkdownViewerView`.
-     */
-    private var inputView: some View {
-        return VStack {
-            Text(Constants.inputTitle)
-            ScrollableView {
-                MarkdownViewerView(title: "", text: $incomingCommandHandler.commandInput)
-            }
-            HStack {
-                TextEditor(text: $question)
-                Button("Send") {
-                    incomingCommandHandler.askQuestion(question)
-                }
-            }
-
-            .padding()
-            .onChange(of: incomingCommandHandler.command) { _ in
-                editorEnabled = incomingCommandHandler.command == CommandType.ask
-            }
-        }
-    }
-
-    /**
-     The `outputView` contains output title and an output scrollable view of `MarkdownViewerView`.
-     */
-    private var outputView: some View {
-        VStack {
-            Text(Constants.outputTitle)
-            ScrollableView {
-                MarkdownViewerView(title: "", text: $incomingCommandHandler.commandOutput)
-            }
-        }
-    }
-
-    // MARK: - Helpers
 
     /**
      Returns a scrollable view representing a title and corresponding text for the `OutputView`.
@@ -95,6 +48,110 @@ struct OutputView: View {
     private func scrollableView(title: String, text: Binding<String>) -> some View {
         ScrollableView {
             MarkdownViewerView(title: title, text: text)
+        }
+    }
+    
+    /**
+     Sends the current question to the `IncomingCommandHandler`.
+     */
+    private func send() {
+        commandHandler.askQuestion(question)
+    }
+    
+    /**
+     Clears the `IncomingCommandHandler` and the text input.
+     */
+    private func clear() {
+        commandHandler.clear()
+        question = ""
+    }
+
+    // MARK: - Views
+
+    var body: some View {
+        ZStack {
+            // Show progress view when a command is being executed
+            if commandHandler.isExecuting {
+                ProgressView(LocalizedStringKey("Asking ChatGPT..."))
+            }
+            mainView
+        }
+    }
+
+    /**
+     The `inputView` contains the input title, scrollable input view, toggle button, and clear button.
+     */
+    private var inputView: some View {
+        VStack(spacing: 0) {
+            // Scrollable input view
+            scrollableView(title: Constant.inputTitle, text: $commandHandler.commandInput)
+            // Divider and toggle button
+            Divider()
+                .padding(.bottom, 4)
+            toggleButton
+            Spacer()
+        }
+    }
+
+    /**
+     The `toggleButton` contains a button for expanding and collapsing the text input view, as well as the text editor if it is expanded, or the clear button if it is not expanded.
+     */
+    private var toggleButton: some View {
+        HStack {
+            HStack {
+                Button {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        questionInputExpanded.toggle()
+                    }
+                } label: {
+                    Image(systemName: questionInputExpanded ? "chevron.down" : "chevron.up")
+                }
+                .padding(.leading)
+            }
+            // Show text editor if expanded, or clear button if not expanded
+            if questionInputExpanded {
+                customEditorView
+            } else {
+                Button(action: clear) {
+                    Text("Clear")
+                }.transition(.opacity)
+            }
+        }
+    }
+
+    /**
+     The `customEditorView` allows users to edit and send a custom question to the `IncomingCommandHandler`.
+     */
+    private var customEditorView: some View {
+        HStack {
+            TextEditor(text: $question)
+                .font(.body)
+                .padding(.all, 8)
+                .background(Color.blue.opacity(0.05))
+                .cornerRadius(8)
+                .shadow(radius: 2)
+                .frame(height: Constant.inputViewHeight)
+                .transition(.slide)
+            
+            VStack {
+                Button("Send", action: send)
+                    .frame(width: Constant.buttonWidth, height: Constant.buttonHeight)
+                Button("Clear", action: clear)
+                    .frame(width: Constant.buttonWidth, height: Constant.buttonHeight)
+            }
+            .transition(.slide)
+        }
+    }
+
+    /**
+     The `outputView` contains output title and an output scrollable view of `MarkdownViewerView`.
+     */
+    private var outputView: some View {
+        VStack {
+            Text(Constant.outputTitle)
+            ScrollableView {
+                MarkdownViewerView(title: "", text: $commandHandler.commandOutput)
+            }
         }
     }
 }
