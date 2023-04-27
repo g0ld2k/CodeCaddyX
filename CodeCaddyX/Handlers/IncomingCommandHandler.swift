@@ -24,7 +24,6 @@ struct Command {
  Handler for processing incoming commands from Xcode Extension
  */
 class IncomingCommandHandler: ObservableObject {
-    
     @Published var commandOutput: String = ""
     @Published var commandInput: String = ""
     @Published var command: CommandType?
@@ -154,7 +153,7 @@ class IncomingCommandHandler: ObservableObject {
         - rememberCommand: Whether the command should be remembered in the `OpenAIConnector` log.
      */
     private func handleOpenEndedCommand(_ decodedCodeString: String) {
-        commandInput = "```\n" + decodedCodeString + "\n```"
+        commandInput = decodedCodeString
     }
 
     /**
