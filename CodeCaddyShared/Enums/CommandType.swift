@@ -10,9 +10,9 @@ import Foundation
 /**
  An enum representing the command types that are supported.
  */
-public enum CommandType: String {
+public enum CommandType: String, Equatable {
     case explain
     case codeReview
     case unitTests
+    case ask
 }
-

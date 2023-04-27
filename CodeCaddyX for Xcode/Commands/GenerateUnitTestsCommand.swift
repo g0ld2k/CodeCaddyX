@@ -6,9 +6,9 @@
 // --------------------------------------------------------------------------
 
 import AppKit
+import CodeCaddyShared
 import Foundation
 import XcodeKit
-import CodeCaddyShared
 
 class GenerateUnitTestsCommand: BaseCommand {
     override func perform(with invocation: XCSourceEditorCommandInvocation) async throws {

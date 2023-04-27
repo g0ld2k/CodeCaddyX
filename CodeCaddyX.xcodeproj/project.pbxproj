@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8358DB3629F4DC2900C6821E /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8358DB3529F4DC2900C6821E /* CommandType.swift */; };
+		8358DB3B29F640B600C6821E /* AskAboutCodeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8358DB3A29F640B600C6821E /* AskAboutCodeCommand.swift */; };
 		83A11A1429F0F6F30047965F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 83A11A1329F0F6F30047965F /* MarkdownUI */; };
 		83BBF99A29EDBDFD00BDAF58 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBF99929EDBDFD00BDAF58 /* Secrets.swift */; };
 		83C7862029F1DB7C00F9294D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C7861F29F1DB7C00F9294D /* SettingsView.swift */; };
 		83C7862229F1DD3300F9294D /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C7862129F1DD3300F9294D /* OutputView.swift */; };
 		83C7862529F22A1700F9294D /* ScrollableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C7862429F22A1700F9294D /* ScrollableView.swift */; };
 		83C7862729F22A6F00F9294D /* MarkdownViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C7862629F22A6F00F9294D /* MarkdownViewerView.swift */; };
+		83D7787829FA2EF1000269E6 /* Sourceful in Frameworks */ = {isa = PBXBuildFile; productRef = 83D7787729FA2EF1000269E6 /* Sourceful */; };
 		E109CCD629E8380B00901432 /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11463B829E832C600B79D74 /* XcodeKit.framework */; };
 		E109CCD729E8380B00901432 /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E11463B829E832C600B79D74 /* XcodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E11463A229E8322F00B79D74 /* CodeCaddyX_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11463A129E8322F00B79D74 /* CodeCaddyX_App.swift */; };
@@ -105,6 +107,7 @@
 
 /* Begin PBXFileReference section */
 		8358DB3529F4DC2900C6821E /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
+		8358DB3A29F640B600C6821E /* AskAboutCodeCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAboutCodeCommand.swift; sourceTree = "<group>"; };
 		83BBF99929EDBDFD00BDAF58 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		83C7861F29F1DB7C00F9294D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		83C7862129F1DD3300F9294D /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
@@ -146,6 +149,7 @@
 			files = (
 				E1AB943829F039C2006C3AC4 /* CodeCaddyShared.framework in Frameworks */,
 				83A11A1429F0F6F30047965F /* MarkdownUI in Frameworks */,
+				83D7787829FA2EF1000269E6 /* Sourceful in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +293,7 @@
 				E16265A029E890B3002D881C /* GenerateImprovementsCommand.swift */,
 				E16265A229E8A0F9002D881C /* BaseCommand.swift */,
 				E1AB942B29EE1744006C3AC4 /* RememberCommand.swift */,
+				8358DB3A29F640B600C6821E /* AskAboutCodeCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 			name = CodeCaddyX;
 			packageProductDependencies = (
 				83A11A1329F0F6F30047965F /* MarkdownUI */,
+				83D7787729FA2EF1000269E6 /* Sourceful */,
 			);
 			productName = CodeCaddyX;
 			productReference = E114639E29E8322F00B79D74 /* CodeCaddyX.app */;
@@ -421,6 +427,7 @@
 			mainGroup = E114639529E8322F00B79D74;
 			packageReferences = (
 				83A11A1229F0F6F30047965F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				83D7787629FA2EF1000269E6 /* XCRemoteSwiftPackageReference "Sourceful" */,
 			);
 			productRefGroup = E114639F29E8322F00B79D74 /* Products */;
 			projectDirPath = "";
@@ -480,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E162659F29E88CB4002D881C /* GenerateUnitTestsCommand.swift in Sources */,
+				8358DB3B29F640B600C6821E /* AskAboutCodeCommand.swift in Sources */,
 				83BBF99A29EDBDFD00BDAF58 /* Secrets.swift in Sources */,
 				E11463BC29E832C600B79D74 /* SourceEditorExtension.swift in Sources */,
 				E1AB942C29EE1744006C3AC4 /* RememberCommand.swift in Sources */,
@@ -662,7 +670,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.2.1b2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -695,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.2.1b2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -724,7 +732,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.2.1b2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy.CodeCaddyforXcode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -755,7 +763,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.2.1b2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy.CodeCaddyforXcode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -888,6 +896,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		83D7787629FA2EF1000269E6 /* XCRemoteSwiftPackageReference "Sourceful" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/Sourceful";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -895,6 +911,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 83A11A1229F0F6F30047965F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
+		};
+		83D7787729FA2EF1000269E6 /* Sourceful */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83D7787629FA2EF1000269E6 /* XCRemoteSwiftPackageReference "Sourceful" */;
+			productName = Sourceful;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
