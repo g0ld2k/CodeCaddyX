@@ -6,8 +6,8 @@
 //
 
 import CodeCaddyShared
+import CodeEditorView
 import MarkdownUI
-import Sourceful
 import SwiftUI
 
 /**
@@ -16,15 +16,16 @@ import SwiftUI
 struct OutputView: View {
     /// The object responsible for handling incoming commands.
     @EnvironmentObject var commandHandler: IncomingCommandHandler
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+
+    @State private var position: CodeEditor.Position = .init()
+    @State private var messages: Set<Located<Message>> = Set()
 
     /// The current input question.
     @State private var question = ""
 
-    /// A boolean that determines whether the text editor is enabled.
-    @State private var editorEnabled = false
-
     /// A boolean that determines whether the input view should be expanded.
-    @State private var questionInputExpanded = true
+    @State private var questionInputExpanded = false
 
     private enum Constant {
         /// The title of the input view.
@@ -87,7 +88,14 @@ struct OutputView: View {
             .font(.headline)
             .padding()
 
-            SourceCodeTextEditor(text: $commandHandler.commandInput, shouldBecomeFirstResponder: false)
+            CodeEditor(
+                text: $commandHandler.commandInput,
+                position: $position,
+                messages: $messages,
+                language: .swift
+            )
+            .environment(\.codeEditorTheme,
+                         colorScheme == .dark ? Theme.defaultDark : Theme.defaultLight)
 
             Divider()
                 .padding(.bottom, 4)
@@ -121,6 +129,10 @@ struct OutputView: View {
                     Text("Clear")
                 }.transition(.opacity)
             }
+        }
+        .onChange(of: commandHandler.command) { newCommand in
+            guard let newCommand else { return }
+            questionInputExpanded = newCommand == .ask
         }
     }
 

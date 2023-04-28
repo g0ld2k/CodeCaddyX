@@ -111,6 +111,8 @@ class IncomingCommandHandler: ObservableObject {
         - commandString: The decoded command string.
      */
     private func handleCommand(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand: Bool = false) {
+        command = commandType
+
         switch commandType {
         case .explain, .codeReview, .unitTests:
             handleClosedCommand(decodedCodeString, commandType, rememberCommand: rememberCommand)
@@ -137,7 +139,7 @@ class IncomingCommandHandler: ObservableObject {
             openAIConnector.flushLog()
         }
 
-        commandInput = "```\n" + decodedCodeString + "\n```"
+        commandInput = decodedCodeString
 
         openAIConnector.logMessage("\(commandText)\n\(decodedCodeString)", messageUserType: .user)
 
