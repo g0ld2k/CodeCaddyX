@@ -691,7 +691,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.1b3;
+				MARKETING_VERSION = 0.3.1a1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -724,7 +724,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.1b3;
+				MARKETING_VERSION = 0.3.1a1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -753,7 +753,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.1b3;
+				MARKETING_VERSION = 0.3.1a1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy.CodeCaddyforXcode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -784,7 +784,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.1b3;
+				MARKETING_VERSION = 0.3.1a1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.g0ld2k.CodeCaddy.CodeCaddyforXcode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
