@@ -6,7 +6,9 @@
 // -------------------------------------------------------------------------
 
 import AppKit
+import CodeCaddyShared
 import Foundation
+import OpenAIStreamingCompletions
 import SwiftUI
 
 /**
@@ -19,14 +21,19 @@ import SwiftUI
  */
 class CodeCaddyAppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     /// An instance of `IncomingCommandHandler` for handling incoming URLs.
-    let incomingCommandHandler = IncomingCommandHandler()
+    var incomingCommandHandler: IncomingCommandHandler
+
+    override init() {
+        incomingCommandHandler = .init(openAIHandler: .init(openAIService: .init()))
+        super.init()
+    }
 
     /**
      Handle `kAEGetURL` events by calling `IncomingCommandHandler.handleIncomingURL(_:url)` on the `incomingCommandHandler` instance.
 
      - Parameters:
-        - event: The incoming Apple event.
-        - replyEvent: (Unused) The outgoing Apple event.
+     - event: The incoming Apple event.
+     - replyEvent: (Unused) The outgoing Apple event.
      */
     @objc func handleAppleEvent(_ event: NSAppleEventDescriptor, withReplyEvent _: NSAppleEventDescriptor) {
         guard let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue,

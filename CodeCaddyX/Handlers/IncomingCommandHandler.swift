@@ -31,8 +31,8 @@ class IncomingCommandHandler: ObservableObject {
     @Published var command: CommandType?
     @Published var isExecuting: Bool = false
 
-    private var streamingCompletionSubscription: AnyCancellable?
-    private var openAIService: OpenAIService = .init()
+    private var cancellables: [AnyCancellable] = []
+    private var openAIService: OpenAIService?
 
     private enum Constants {
         static let urlScheme = "codecaddyx"
@@ -62,7 +62,11 @@ class IncomingCommandHandler: ObservableObject {
         """,
     ]
 
-    init() {}
+    private let openAIHandler: OpenAIHandler
+
+    init(openAIHandler: OpenAIHandler) {
+        self.openAIHandler = openAIHandler
+    }
 
     /**
      Handles incoming command URLs from the `URL` provided.
@@ -94,9 +98,7 @@ class IncomingCommandHandler: ObservableObject {
      - question: The question to ask.
      */
     func askQuestion(_ question: String) {
-        openAIService.addToMessageLog("\(commandInput)\n\n\(question)", type: .user)
-
-        sendToAPI()
+        sendToAPI(commandInput, question)
     }
 
     /**
@@ -105,7 +107,7 @@ class IncomingCommandHandler: ObservableObject {
     func clear() {
         commandInput = ""
         commandOutput = ""
-        openAIService.flushLog()
+        openAIService?.flushLog()
     }
 
     /**
@@ -115,14 +117,14 @@ class IncomingCommandHandler: ObservableObject {
      - decodedCodeString: The decoded code string.
      - commandString: The decoded command string.
      */
-    private func handleCommand(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand: Bool = false) {
+    private func handleCommand(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand _: Bool = false) {
         command = commandType
 
         switch commandType {
         case .explain, .codeReview, .unitTests:
-            handleClosedCommand(decodedCodeString, commandType, rememberCommand: rememberCommand)
+            handleClosedCommandType(decodedCodeString, commandType)
         case .ask:
-            handleOpenEndedCommand(decodedCodeString)
+            handleOpenEndedCommandType(decodedCodeString)
         }
     }
 
@@ -134,21 +136,19 @@ class IncomingCommandHandler: ObservableObject {
      - commandString: The decoded command string.
      - rememberCommand: Whether the command should be remembered in the `OpenAIConnector` log.
      */
-    private func handleClosedCommand(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand: Bool = false) {
+    private func handleClosedCommandType(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand: Bool = false) {
         guard let commandText = commands[commandType] else {
             commandOutput = "Something went wrong, maybe your command isn't supported?"
             return
         }
 
         if rememberCommand == false {
-            openAIService.flushLog()
+            openAIService?.flushLog()
         }
 
         commandInput = decodedCodeString
-        
-        openAIService.addToMessageLog("\(commandText)\n\(decodedCodeString)", type: .user)
 
-        sendToAPI()
+        sendToAPI(commandText, decodedCodeString)
     }
 
     /**
@@ -159,25 +159,32 @@ class IncomingCommandHandler: ObservableObject {
      - commandString: The decoded command string.
      - rememberCommand: Whether the command should be remembered in the `OpenAIConnector` log.
      */
-    private func handleOpenEndedCommand(_ decodedCodeString: String) {
+    private func handleOpenEndedCommandType(_ decodedCodeString: String) {
         commandInput = decodedCodeString
     }
 
     /**
      Sends data to the `OpenAIConnector` and waits for a response. Once received, updates the command output accordingly.
      */
-    private func sendToAPI() {
+    private func sendToAPI(_ commandText: String, _ decodedCodeString: String) {
         Task.init {
             DispatchQueue.main.async { [weak self] in
                 self?.commandOutput = ""
             }
 
-            try openAIService.sendToAssistant()
-
-            streamingCompletionSubscription = openAIService.$latestMessage
-                .sink { [weak self] latestMessage in
+            self.openAIHandler.sendToAPI(commandText, decodedCodeString)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { [weak self] completion in
+                    switch completion {
+                    case let .failure(error):
+                        self?.commandOutput = "Error: \(error.localizedDescription)"
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { [weak self] latestMessage in
                     self?.commandOutput = latestMessage
-                }
+                })
+                .store(in: &self.cancellables)
         }
     }
 }
