@@ -10,6 +10,10 @@
 		8358DB3629F4DC2900C6821E /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8358DB3529F4DC2900C6821E /* CommandType.swift */; };
 		8358DB3B29F640B600C6821E /* AskAboutCodeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8358DB3A29F640B600C6821E /* AskAboutCodeCommand.swift */; };
 		83A11A1429F0F6F30047965F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 83A11A1329F0F6F30047965F /* MarkdownUI */; };
+		83AF841829FEFA5300035124 /* StreamingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AF841729FEFA5300035124 /* StreamingRequest.swift */; };
+		83AF843E2A00B42800035124 /* OpenAIStreamingCompletions in Frameworks */ = {isa = PBXBuildFile; productRef = 83AF843D2A00B42800035124 /* OpenAIStreamingCompletions */; };
+		83AF84402A00C4BC00035124 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AF843F2A00C4BC00035124 /* OpenAIService.swift */; };
+		83AF84422A00CD2400035124 /* OpenAIStreamingCompletions in Frameworks */ = {isa = PBXBuildFile; productRef = 83AF84412A00CD2400035124 /* OpenAIStreamingCompletions */; };
 		83BBF99A29EDBDFD00BDAF58 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BBF99929EDBDFD00BDAF58 /* Secrets.swift */; };
 		83C7862029F1DB7C00F9294D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C7861F29F1DB7C00F9294D /* SettingsView.swift */; };
 		83C7862229F1DD3300F9294D /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C7862129F1DD3300F9294D /* OutputView.swift */; };
@@ -108,6 +112,8 @@
 /* Begin PBXFileReference section */
 		8358DB3529F4DC2900C6821E /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
 		8358DB3A29F640B600C6821E /* AskAboutCodeCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAboutCodeCommand.swift; sourceTree = "<group>"; };
+		83AF841729FEFA5300035124 /* StreamingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingRequest.swift; sourceTree = "<group>"; };
+		83AF843F2A00C4BC00035124 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
 		83BBF99929EDBDFD00BDAF58 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		83C7861F29F1DB7C00F9294D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		83C7862129F1DD3300F9294D /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
@@ -148,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1AB943829F039C2006C3AC4 /* CodeCaddyShared.framework in Frameworks */,
+				83AF843E2A00B42800035124 /* OpenAIStreamingCompletions in Frameworks */,
 				83A11A1429F0F6F30047965F /* MarkdownUI in Frameworks */,
 				83D7788129FB6923000269E6 /* CodeEditorView in Frameworks */,
 			);
@@ -168,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1AB944229F040B9006C3AC4 /* Security.framework in Frameworks */,
+				83AF84422A00CD2400035124 /* OpenAIStreamingCompletions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +322,8 @@
 			children = (
 				E162659929E8454E002D881C /* OpenAIConnector.swift */,
 				E1AB943F29F039E3006C3AC4 /* KeychainService.swift */,
+				83AF841729FEFA5300035124 /* StreamingRequest.swift */,
+				83AF843F2A00C4BC00035124 /* OpenAIService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -352,6 +362,7 @@
 			packageProductDependencies = (
 				83A11A1329F0F6F30047965F /* MarkdownUI */,
 				83D7788029FB6923000269E6 /* CodeEditorView */,
+				83AF843D2A00B42800035124 /* OpenAIStreamingCompletions */,
 			);
 			productName = CodeCaddyX;
 			productReference = E114639E29E8322F00B79D74 /* CodeCaddyX.app */;
@@ -390,6 +401,9 @@
 			dependencies = (
 			);
 			name = CodeCaddyShared;
+			packageProductDependencies = (
+				83AF84412A00CD2400035124 /* OpenAIStreamingCompletions */,
+			);
 			productName = CodeCaddyShared;
 			productReference = E1AB943229F039C1006C3AC4 /* CodeCaddyShared.framework */;
 			productType = "com.apple.product-type.framework";
@@ -428,6 +442,7 @@
 			packageReferences = (
 				83A11A1229F0F6F30047965F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				83D7787F29FB6923000269E6 /* XCRemoteSwiftPackageReference "CodeEditorView" */,
+				83AF843C2A00B42800035124 /* XCRemoteSwiftPackageReference "openai-streaming-completions-swift" */,
 			);
 			productRefGroup = E114639F29E8322F00B79D74 /* Products */;
 			projectDirPath = "";
@@ -506,6 +521,8 @@
 				8358DB3629F4DC2900C6821E /* CommandType.swift in Sources */,
 				E1AB944629F062A3006C3AC4 /* OpenAIResponseDecoder.swift in Sources */,
 				E1AB944529F0628C006C3AC4 /* OpenAIConnector.swift in Sources */,
+				83AF841829FEFA5300035124 /* StreamingRequest.swift in Sources */,
+				83AF84402A00C4BC00035124 /* OpenAIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,6 +913,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		83AF843C2A00B42800035124 /* XCRemoteSwiftPackageReference "openai-streaming-completions-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nate-parrott/openai-streaming-completions-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		83D7787F29FB6923000269E6 /* XCRemoteSwiftPackageReference "CodeEditorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mchakravarty/CodeEditorView";
@@ -911,6 +936,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 83A11A1229F0F6F30047965F /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
+		};
+		83AF843D2A00B42800035124 /* OpenAIStreamingCompletions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83AF843C2A00B42800035124 /* XCRemoteSwiftPackageReference "openai-streaming-completions-swift" */;
+			productName = OpenAIStreamingCompletions;
+		};
+		83AF84412A00CD2400035124 /* OpenAIStreamingCompletions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83AF843C2A00B42800035124 /* XCRemoteSwiftPackageReference "openai-streaming-completions-swift" */;
+			productName = OpenAIStreamingCompletions;
 		};
 		83D7788029FB6923000269E6 /* CodeEditorView */ = {
 			isa = XCSwiftPackageProductDependency;
