@@ -6,14 +6,16 @@
 // -------------------------------------------------------------------------
 
 import CodeCaddyShared
+import Combine
 import Foundation
+import OpenAIStreamingCompletions
 
 /**
  A struct representing a command.
 
  - Parameters:
-    - type: The command type.
-    - commandText: The text for the command.
+ - type: The command type.
+ - commandText: The text for the command.
  */
 struct Command {
     let type: CommandType
@@ -28,6 +30,9 @@ class IncomingCommandHandler: ObservableObject {
     @Published var commandInput: String = ""
     @Published var command: CommandType?
     @Published var isExecuting: Bool = false
+
+    private var streamingCompletionSubscription: AnyCancellable?
+    private var openAIService: OpenAIService = .init()
 
     private enum Constants {
         static let urlScheme = "codecaddyx"
@@ -57,13 +62,13 @@ class IncomingCommandHandler: ObservableObject {
         """,
     ]
 
-    private let openAIConnector = OpenAIConnector()
+    init() {}
 
     /**
      Handles incoming command URLs from the `URL` provided.
 
      - Parameters:
-        - url: The URL received.
+     - url: The URL received.
      */
     func handleIncomingURL(_ url: URL) {
         guard url.scheme == Constants.urlScheme,
@@ -86,10 +91,10 @@ class IncomingCommandHandler: ObservableObject {
      Ask a question to the OpenAI assistant.
 
      - Parameters:
-        - question: The question to ask.
+     - question: The question to ask.
      */
     func askQuestion(_ question: String) {
-        openAIConnector.logMessage("\(commandInput)\n\n\(question)", messageUserType: .user)
+        openAIService.addToMessageLog("\(commandInput)\n\n\(question)", type: .user)
 
         sendToAPI()
     }
@@ -100,15 +105,15 @@ class IncomingCommandHandler: ObservableObject {
     func clear() {
         commandInput = ""
         commandOutput = ""
-        openAIConnector.flushLog()
+        openAIService.flushLog()
     }
 
     /**
      Handles the command based on the command text received.
 
      - Parameters:
-        - decodedCodeString: The decoded code string.
-        - commandString: The decoded command string.
+     - decodedCodeString: The decoded code string.
+     - commandString: The decoded command string.
      */
     private func handleCommand(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand: Bool = false) {
         command = commandType
@@ -125,9 +130,9 @@ class IncomingCommandHandler: ObservableObject {
      Handles a closed command (command that does not require the user to respond)
 
      - Parameters:
-        - decodedCodeString: The decoded code string.
-        - commandString: The decoded command string.
-        - rememberCommand: Whether the command should be remembered in the `OpenAIConnector` log.
+     - decodedCodeString: The decoded code string.
+     - commandString: The decoded command string.
+     - rememberCommand: Whether the command should be remembered in the `OpenAIConnector` log.
      */
     private func handleClosedCommand(_ decodedCodeString: String, _ commandType: CommandType, rememberCommand: Bool = false) {
         guard let commandText = commands[commandType] else {
@@ -136,12 +141,12 @@ class IncomingCommandHandler: ObservableObject {
         }
 
         if rememberCommand == false {
-            openAIConnector.flushLog()
+            openAIService.flushLog()
         }
 
         commandInput = decodedCodeString
-
-        openAIConnector.logMessage("\(commandText)\n\(decodedCodeString)", messageUserType: .user)
+        
+        openAIService.addToMessageLog("\(commandText)\n\(decodedCodeString)", type: .user)
 
         sendToAPI()
     }
@@ -150,9 +155,9 @@ class IncomingCommandHandler: ObservableObject {
      Handles an open-ended command (command that allows the user to ask follow up responses)
 
      - Parameters:
-        - decodedCodeString: The decoded code string.
-        - commandString: The decoded command string.
-        - rememberCommand: Whether the command should be remembered in the `OpenAIConnector` log.
+     - decodedCodeString: The decoded code string.
+     - commandString: The decoded command string.
+     - rememberCommand: Whether the command should be remembered in the `OpenAIConnector` log.
      */
     private func handleOpenEndedCommand(_ decodedCodeString: String) {
         commandInput = decodedCodeString
@@ -164,24 +169,15 @@ class IncomingCommandHandler: ObservableObject {
     private func sendToAPI() {
         Task.init {
             DispatchQueue.main.async { [weak self] in
-                self?.isExecuting = true
                 self?.commandOutput = ""
             }
 
-            try await openAIConnector.sendToAssistant()
+            try openAIService.sendToAssistant()
 
-            DispatchQueue.main.async { [weak self] in
-                self?.isExecuting = false
-            }
-
-            guard let latestMessage = openAIConnector.messageLog.last else {
-                commandOutput = "That's funny OpenAI didn't send us anything back..."
-                return
-            }
-
-            DispatchQueue.main.async { [weak self] in
-                self?.commandOutput = latestMessage["content"] ?? "Missing"
-            }
+            streamingCompletionSubscription = openAIService.$latestMessage
+                .sink { [weak self] latestMessage in
+                    self?.commandOutput = latestMessage
+                }
         }
     }
 }
