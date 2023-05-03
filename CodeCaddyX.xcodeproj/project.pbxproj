@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830776E12A02152300977BC6 /* OpenAIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830776E02A02152300977BC6 /* OpenAIHandler.swift */; };
 		8358DB3629F4DC2900C6821E /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8358DB3529F4DC2900C6821E /* CommandType.swift */; };
 		8358DB3B29F640B600C6821E /* AskAboutCodeCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8358DB3A29F640B600C6821E /* AskAboutCodeCommand.swift */; };
 		83A11A1429F0F6F30047965F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 83A11A1329F0F6F30047965F /* MarkdownUI */; };
@@ -110,6 +111,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		830776E02A02152300977BC6 /* OpenAIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIHandler.swift; sourceTree = "<group>"; };
 		8358DB3529F4DC2900C6821E /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
 		8358DB3A29F640B600C6821E /* AskAboutCodeCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAboutCodeCommand.swift; sourceTree = "<group>"; };
 		83AF841729FEFA5300035124 /* StreamingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingRequest.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				E1AB945129F08EA5006C3AC4 /* IncomingCommandHandler.swift */,
+				830776E02A02152300977BC6 /* OpenAIHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				83C7862029F1DB7C00F9294D /* SettingsView.swift in Sources */,
 				E1AB945229F08EA5006C3AC4 /* IncomingCommandHandler.swift in Sources */,
 				E1AB944829F070DF006C3AC4 /* CodeCaddyAppDelegate.swift in Sources */,
+				830776E12A02152300977BC6 /* OpenAIHandler.swift in Sources */,
 				E11463A429E8322F00B79D74 /* ContentView.swift in Sources */,
 				E11463A229E8322F00B79D74 /* CodeCaddyX_App.swift in Sources */,
 				83C7862729F22A6F00F9294D /* MarkdownViewerView.swift in Sources */,

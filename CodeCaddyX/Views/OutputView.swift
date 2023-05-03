@@ -175,6 +175,6 @@ struct OutputView: View {
 struct OutputView_Previews: PreviewProvider {
     static var previews: some View {
         OutputView()
-            .environmentObject(IncomingCommandHandler())
+            .environmentObject(IncomingCommandHandler(openAIHandler: .init(openAIService: .init(openAIAPI: .init(apiKey: "123456")))))
     }
 }

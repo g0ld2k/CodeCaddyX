@@ -13,33 +13,42 @@ public class OpenAIService: ObservableObject {
     private let defaultMessageLog: [OpenAIAPI.Message] = [
         .init(role: .system, content: "You're a friendly, helpful assistant"),
     ]
-    private var api: OpenAIAPI
+    private var openAIAPI: OpenAIAPI
     private var subscription: AnyCancellable?
 
     @Published public var messageLog: [OpenAIAPI.Message]
     @Published public var streamingCompletion: StreamingCompletion?
     @Published public var latestMessage: String = ""
 
-    public init() {
+    public init(openAIAPI incomingOpenAIAPI: OpenAIAPI? = nil) {
         messageLog = defaultMessageLog
-        api = OpenAIAPI(apiKey: "")
+
+        if let incomingOpenAIAPI {
+            openAIAPI = incomingOpenAIAPI
+        } else {
+            openAIAPI = .init(apiKey: "")
+        }
 
         Task {
             let apiKey = try await KeychainService.shared.load(secretKey: KeychainKeys.openAIAPIKey)
-            api = OpenAIAPI(apiKey: apiKey)
+            self.openAIAPI = .init(apiKey: apiKey)
         }
     }
 
-    public func sendToAssistant() throws {
-        streamingCompletion = try api.completeChatStreamingWithObservableObject(.init(messages: messageLog))
+    public func startChatStreaming() -> Result<Void, Error> {
+        do {
+            streamingCompletion = try openAIAPI.completeChatStreamingWithObservableObject(.init(messages: messageLog))
 
-        subscription = streamingCompletion?
-            .$text
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] text in
-                print("Text: \(text)")
-                self?.latestMessage = text
-            })
+            subscription = streamingCompletion?
+                .$text
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { [weak self] text in
+                    self?.latestMessage = text
+                })
+            return .success(())
+        } catch {
+            return .failure(error)
+        }
     }
 
     public func addToMessageLog(_ message: String, type: OpenAIAPI.Message.Role) {
