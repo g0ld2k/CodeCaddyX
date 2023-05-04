@@ -15,4 +15,5 @@ public enum CommandType: String, Equatable {
     case codeReview
     case unitTests
     case ask
+    case document
 }

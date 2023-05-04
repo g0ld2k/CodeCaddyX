@@ -14,3 +14,9 @@ class AddCommentsToCodeCommand: BaseCommand {
         try await performSelectionCommand(with: invocation, command: command, resultType: .replace, isComment: false)
     }
 }
+
+class AddCommentsToCodeInAppCommand: BaseCommand {
+    override func perform(with invocation: XCSourceEditorCommandInvocation) async throws {
+        try await performInCompanionApp(with: invocation, command: .document)
+    }
+}
