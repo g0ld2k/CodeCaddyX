@@ -10,6 +10,14 @@
 			<array>
 				<dict>
 					<key>XCSourceEditorCommandClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).AskAboutCodeCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).AskAboutCodeCommand</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>Ask About Selection</string>
+				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).ExplainCommand</string>
 					<key>XCSourceEditorCommandIdentifier</key>
 					<string>$(PRODUCT_BUNDLE_IDENTIFIER).ExplainCommand</string>
@@ -18,19 +26,19 @@
 				</dict>
 				<dict>
 					<key>XCSourceEditorCommandClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).AddCommentsToCodeInAppCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).AddCommentsToCodeInAppCommand</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>Generate Code Comments for Selection in CodeCaddy</string>
+				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).AddCommentsToCodeCommand</string>
 					<key>XCSourceEditorCommandIdentifier</key>
 					<string>$(PRODUCT_BUNDLE_IDENTIFIER).AddCommentsToCodeCommand</string>
 					<key>XCSourceEditorCommandName</key>
-					<string>Generate Code Comments for Selection</string>
-				</dict>
-				<dict>
-					<key>XCSourceEditorCommandClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).GenerateImprovementsCommand</string>
-					<key>XCSourceEditorCommandIdentifier</key>
-					<string>$(PRODUCT_BUNDLE_IDENTIFIER).GenerateImprovementsCommand</string>
-					<key>XCSourceEditorCommandName</key>
-					<string>Generate Improvements for Selection</string>
+					<string>Generate Code Comments for Selection in Xcode</string>
 				</dict>
 				<dict>
 					<key>XCSourceEditorCommandClassName</key>
@@ -38,15 +46,15 @@
 					<key>XCSourceEditorCommandIdentifier</key>
 					<string>$(PRODUCT_BUNDLE_IDENTIFIER).GenerateUnitTestsCommand</string>
 					<key>XCSourceEditorCommandName</key>
-					<string>Generate Unit Tests for Selection</string>
+					<string>Create Unit Tests for Selection</string>
 				</dict>
 				<dict>
 					<key>XCSourceEditorCommandClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).AskAboutCodeCommand</string>
+					<string>$(PRODUCT_MODULE_NAME).GenerateImprovementsCommand</string>
 					<key>XCSourceEditorCommandIdentifier</key>
-					<string>$(PRODUCT_BUNDLE_IDENTIFIER).AskAboutCodeCommand</string>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).GenerateImprovementsCommand</string>
 					<key>XCSourceEditorCommandName</key>
-					<string>Ask About Selection</string>
+					<string>Perform Code Review</string>
 				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>

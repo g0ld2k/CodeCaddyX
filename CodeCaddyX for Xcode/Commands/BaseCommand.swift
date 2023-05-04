@@ -22,13 +22,13 @@ class BaseCommand: NSObject, XCSourceEditorCommand {
         case emptyOutput
     }
 
-    let apiService = OpenAIConnector()
-
     func perform(with _: XCSourceEditorCommandInvocation) async throws {
         assertionFailure("This command should not be used directly.  Subclass it and use the appropriate methods")
     }
 
     func performSelectionCommand(with invocation: XCSourceEditorCommandInvocation, command: String, resultType: CommandResult, isComment: Bool = true, remember: Bool = false) async throws {
+        let apiService = OpenAIConnector()
+
         let lines = invocation.buffer.lines as? [String] ?? []
 
         let selections = invocation.buffer.selections as? [XCSourceTextRange] ?? []

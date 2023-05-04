@@ -58,8 +58,9 @@ class IncomingCommandHandler: ObservableObject {
             The response should be in markdown (but don't mention you are using markdown) and add a header to the output saying this is a code review.
         """,
         .unitTests: """
-            Create unit tests for the code below. Ensure all edge cases are covered and let me know if anything can't be tested.
+            Create unit tests for the code below. Ensure all edge cases are covered and let me know if anything can't be tested.  Make sure the output has a header named '# Unit Tests'.
         """,
+        .document: "Add comments to the following code using DocC formatting.  The output should be wrapped in a markdown response with a header named 'Documenting Code'",
     ]
 
     private let openAIHandler: OpenAIHandler
@@ -121,7 +122,7 @@ class IncomingCommandHandler: ObservableObject {
         command = commandType
 
         switch commandType {
-        case .explain, .codeReview, .unitTests:
+        case .explain, .codeReview, .unitTests, .document:
             handleClosedCommandType(decodedCodeString, commandType)
         case .ask:
             handleOpenEndedCommandType(decodedCodeString)
@@ -172,7 +173,7 @@ class IncomingCommandHandler: ObservableObject {
                 self?.commandOutput = ""
             }
 
-            self.openAIHandler.sendToAPI(commandText, decodedCodeString)
+            await self.openAIHandler.sendToAPI(commandText, decodedCodeString)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { [weak self] completion in
                     switch completion {

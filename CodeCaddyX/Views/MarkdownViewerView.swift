@@ -19,7 +19,7 @@ struct MarkdownViewerView: View {
     @Binding var text: String
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
                 Text(LocalizedStringKey(title))
                 Spacer()

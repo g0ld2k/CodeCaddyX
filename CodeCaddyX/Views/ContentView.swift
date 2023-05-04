@@ -35,6 +35,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(IncomingCommandHandler(openAIHandler: .init(openAIService: .init(openAIAPI: .init(apiKey: "123456")))))
+            .environmentObject(IncomingCommandHandler(openAIHandler: .init(openAIService: .init(overrideOpenAIAPI: .init(apiKey: "123456")))))
     }
 }

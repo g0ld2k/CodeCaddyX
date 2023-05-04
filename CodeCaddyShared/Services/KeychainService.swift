@@ -8,6 +8,9 @@
 import Foundation
 import Security
 
+/**
+ An Error type used to represent various keychain errors, including saveFailed, loadFailed, deleteFailed, dataConversionFailed, noDataFound, unexpectedStatus.
+ */
 public enum KeychainError: Error {
     case saveFailed
     case loadFailed
@@ -17,17 +20,39 @@ public enum KeychainError: Error {
     case unexpectedStatus(OSStatus)
 }
 
+/**
+ A struct defining static key values for the keychain, including openAIAPIKey.
+ */
 public enum KeychainKeys {
     public static let openAIAPIKey = "openAIAPIKey"
 }
 
+/**
+ A class that provides keychain read/write capabilities. The singleton instance can be accessed via the shared property.
+ */
 public class KeychainService {
+    /**
+     A shared singleton instance of KeychainService.
+     */
     public static let shared = KeychainService()
 
+    /**
+     The keychain service name.
+     */
     private let service = "com.g0ld2k.CodeCaddyX"
 
+    /**
+     Private initializer to ensure singleton pattern is followed.
+     */
     private init() {}
 
+    /**
+     Saves a secret value with the given secretKey to the keychain. This is an async function that can throw KeychainError.
+
+     - Parameters:
+        - secret: The value to be saved.
+        - secretKey: The key to associate with the value.
+     */
     public func save(secret: String, secretKey: String) async throws {
         try await withThrowingTaskGroup(of: Void.self) { group in
             group.addTask {
@@ -37,6 +62,13 @@ public class KeychainService {
         }
     }
 
+    /**
+     Loads a secret value for the given secretKey from the keychain. This is an async function that can throw KeychainError.
+
+     - Parameter secretKey: The key to load the corresponding value.
+
+     - Returns: The loaded value.
+     */
     public func load(secretKey: String) async throws -> String {
         return try await withThrowingTaskGroup(of: String?.self) { group in
             group.addTask {
@@ -51,6 +83,11 @@ public class KeychainService {
         }
     }
 
+    /**
+     Deletes a secret value for the given secretKey from the keychain. This is an async function that can throw KeychainError.
+
+     - Parameter secretKey: The key to delete the corresponding value.
+     */
     public func delete(secretKey: String) async throws {
         try await withThrowingTaskGroup(of: Void.self) { group in
             group.addTask {
@@ -60,6 +97,13 @@ public class KeychainService {
         }
     }
 
+    /**
+     Internal helper function to save a secret value with the given secretKey to the keychain. This is an async function that can throw KeychainError.
+
+     - Parameters:
+        - secret: The value to be saved.
+        - secretKey: The key to associate with the value.
+     */
     private func saveKey(secret: String, secretKey: String) async throws {
         let keyData = secret.data(using: .utf8)!
 
@@ -78,6 +122,13 @@ public class KeychainService {
         }
     }
 
+    /**
+     Internal helper function to load a secret value for the given secretKey from the keychain. This is an async function that can throw KeychainError.
+
+     - Parameter secretKey: The key to load the corresponding value.
+
+     - Returns: The loaded value.
+     */
     private func loadKey(secretKey: String) async throws -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -103,6 +154,11 @@ public class KeychainService {
         }
     }
 
+    /**
+     Internal helper function to delete a secret value for the given secretKey from the keychain. This is an async function that can throw KeychainError.
+
+     - Parameter secretKey: The key to delete the corresponding value.
+     */
     private func deleteKey(secretKey: String) async throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
