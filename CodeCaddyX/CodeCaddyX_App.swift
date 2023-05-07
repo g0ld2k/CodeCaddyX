@@ -16,5 +16,9 @@ struct CodeCaddyX_App: App {
             ContentView()
                 .environmentObject(delegate.incomingCommandHandler)
         }
+
+        Settings {
+            SettingsView()
+        }
     }
 }
