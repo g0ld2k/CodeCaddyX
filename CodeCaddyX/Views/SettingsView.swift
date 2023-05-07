@@ -30,20 +30,23 @@ struct SettingsView: View {
 
     var body: some View {
         VStack {
-            Text("Open AI API Key:")
-            TextField("Enter your Open AI API key", text: $openAiApiKey)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            Button("Save") {
-                saveApiKey()
+            VStack {
+                Text("Open AI API Key:")
+                TextField("Enter your Open AI API key", text: $openAiApiKey)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                Button("Save") {
+                    saveApiKey()
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
+                .onAppear {
+                    loadApiKey()
+                }
             }
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
-            .onAppear {
-                loadApiKey()
-            }
+            .padding()
         }
-        .padding()
+        .frame(width: 480, height: 320)
     }
 
     // MARK: Actions
