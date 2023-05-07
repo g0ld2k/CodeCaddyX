@@ -56,6 +56,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>Perform Code Review</string>
 				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).ConvertObjectiveCToSwiftCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).ConvertObjectiveCToSwiftCommand</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>Convert from Objective-C to Swift</string>
+				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>$(PRODUCT_MODULE_NAME).SourceEditorExtension</string>

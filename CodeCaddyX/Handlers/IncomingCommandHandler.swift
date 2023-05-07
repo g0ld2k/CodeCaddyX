@@ -61,6 +61,11 @@ class IncomingCommandHandler: ObservableObject {
             Create unit tests for the code below. Ensure all edge cases are covered and let me know if anything can't be tested.  Make sure the output has a header named '# Unit Tests'.
         """,
         .document: "Add comments to the following code using DocC formatting.  The output should be wrapped in a markdown response with a header named 'Documenting Code'",
+        .convertFromObjectiveCToSwift: """
+        Convert the following Objective-C code to Swift.  Include code comments for any potential issues, unhandled edge cases, or potential bugs that should be looked at.
+
+                    The response should be in markdown (but don't mention you are using markdown) and add a header to the output saying this is a "Conversion from Objective-C to Swift.
+        """,
     ]
 
     private let openAIHandler: OpenAIHandler
@@ -122,7 +127,7 @@ class IncomingCommandHandler: ObservableObject {
         command = commandType
 
         switch commandType {
-        case .explain, .codeReview, .unitTests, .document:
+        case .explain, .codeReview, .unitTests, .document, .convertFromObjectiveCToSwift:
             handleClosedCommandType(decodedCodeString, commandType)
         case .ask:
             handleOpenEndedCommandType(decodedCodeString)

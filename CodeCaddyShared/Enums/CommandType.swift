@@ -16,4 +16,5 @@ public enum CommandType: String, Equatable {
     case unitTests
     case ask
     case document
+    case convertFromObjectiveCToSwift
 }
