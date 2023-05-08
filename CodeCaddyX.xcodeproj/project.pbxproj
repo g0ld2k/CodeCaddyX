@@ -347,6 +347,7 @@
 				E114639C29E8322F00B79D74 /* Resources */,
 				E11463C729E832C600B79D74 /* Embed Foundation Extensions */,
 				E1AB943D29F039C2006C3AC4 /* Embed Frameworks */,
+				83F813972A0371E600858C9B /* Set Build Number */,
 			);
 			buildRules = (
 			);
@@ -478,6 +479,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		83F813972A0371E600858C9B /* Set Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\n\ngit=$(sh /etc/profile; which git)\nnumber_of_commits=$(\"$git\" rev-list HEAD --count)\n\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\n  if [ -f \"$plist\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${number_of_commits}\" \"$plist\"\n  fi\ndone\n\nsettings_root_plist=\"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Settings.bundle/Root.plist\"\n\nif [ -f \"$settings_root_plist\" ]; then\n  settingsVersion=\"$APP_MARKETING_VERSION (${number_of_commits})\"\n  /usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:1:DefaultValue $settingsVersion\" \"$settings_root_plist\"\nelse\n  echo \"Could not find: $settings_root_plist\"\n  exit 0\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E114639A29E8322F00B79D74 /* Sources */ = {
