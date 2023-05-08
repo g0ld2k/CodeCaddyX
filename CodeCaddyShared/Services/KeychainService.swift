@@ -40,6 +40,17 @@ public class KeychainService {
      The keychain service name.
      */
     private let service = "com.g0ld2k.CodeCaddyX"
+    private var accessGroup: String {
+        let baseAccessGroup = "com.g0ld2k.CodeCaddyX.shared"
+        
+        if let teamID = Bundle.main.infoDictionary!["DEVELOPMENT_TEAM"] as? String {
+            print("\(teamID).\(baseAccessGroup)")
+            return "\(teamID).\(baseAccessGroup)"
+        }
+
+        assertionFailure("Didn't find the team ID")
+        return baseAccessGroup
+    }
 
     /**
      Private initializer to ensure singleton pattern is followed.
@@ -112,6 +123,8 @@ public class KeychainService {
             kSecAttrAccount as String: secretKey,
             kSecAttrService as String: service,
             kSecValueData as String: keyData,
+            kSecAttrAccessGroup as String: accessGroup,
+            kSecUseDataProtectionKeychain as String: true
         ]
 
         SecItemDelete(query as CFDictionary)
@@ -136,6 +149,8 @@ public class KeychainService {
             kSecAttrService as String: service,
             kSecReturnData as String: kCFBooleanTrue!,
             kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecAttrAccessGroup as String: accessGroup,
+            kSecUseDataProtectionKeychain as String: true
         ]
 
         var dataTypeRef: AnyObject?
@@ -164,6 +179,8 @@ public class KeychainService {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: secretKey,
             kSecAttrService as String: service,
+            kSecAttrAccessGroup as String: accessGroup,
+            kSecUseDataProtectionKeychain as String: true
         ]
 
         let status = SecItemDelete(query as CFDictionary)
