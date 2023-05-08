@@ -113,6 +113,8 @@
 		830776E02A02152300977BC6 /* OpenAIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIHandler.swift; sourceTree = "<group>"; };
 		8358DB3529F4DC2900C6821E /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
 		8358DB3A29F640B600C6821E /* AskAboutCodeCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAboutCodeCommand.swift; sourceTree = "<group>"; };
+		838322B02A0981240035C0AE /* CodeCaddyX for XcodeDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CodeCaddyX for XcodeDebug.entitlements"; sourceTree = "<group>"; };
+		838322B12A09812B0035C0AE /* CodeCaddyXDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CodeCaddyXDebug.entitlements; sourceTree = "<group>"; };
 		83AF843F2A00C4BC00035124 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
 		83B31F532A0706D3001BCDAF /* ConvertObjectiveCToSwiftCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertObjectiveCToSwiftCommand.swift; sourceTree = "<group>"; };
 		83C7861F29F1DB7C00F9294D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		E11463A029E8322F00B79D74 /* CodeCaddyX */ = {
 			isa = PBXGroup;
 			children = (
+				838322B12A09812B0035C0AE /* CodeCaddyXDebug.entitlements */,
 				E11463AA29E8323300B79D74 /* CodeCaddyX.entitlements */,
 				E1AB942A29EE1703006C3AC4 /* Info.plist */,
 				E1AB944729F070DF006C3AC4 /* CodeCaddyAppDelegate.swift */,
@@ -268,6 +271,7 @@
 		E11463BA29E832C600B79D74 /* CodeCaddyX for Xcode */ = {
 			isa = PBXGroup;
 			children = (
+				838322B02A0981240035C0AE /* CodeCaddyX for XcodeDebug.entitlements */,
 				E162659D29E88C6C002D881C /* Commands */,
 				E11463BB29E832C600B79D74 /* SourceEditorExtension.swift */,
 				E11463BF29E832C600B79D74 /* Info.plist */,
@@ -663,8 +667,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = CodeCaddyX/CodeCaddyX.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CodeCaddyX/CodeCaddyXDebug.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -698,6 +703,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = CodeCaddyX/CodeCaddyX.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -725,9 +731,10 @@
 		E11463C529E832C600B79D74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "CodeCaddyX for Xcode/CodeCaddyX for Xcode.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "CodeCaddyX for Xcode/CodeCaddyX for XcodeDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -759,10 +766,12 @@
 				CODE_SIGN_ENTITLEMENTS = "CodeCaddyX for Xcode/CodeCaddyX for Xcode.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = M3EDHBHQ38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -789,6 +798,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -826,6 +836,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

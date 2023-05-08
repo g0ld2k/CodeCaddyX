@@ -8,7 +8,7 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.g0ld2k.CodeCaddyX</string>
+		<string>$(AppIdentifierPrefix)com.g0ld2k.CodeCaddyX.shared</string>
 	</array>
 </dict>
 </plist>
