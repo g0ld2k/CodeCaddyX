@@ -44,7 +44,6 @@ public class KeychainService {
         let baseAccessGroup = "com.g0ld2k.CodeCaddyX.shared"
         
         if let teamID = Bundle.main.infoDictionary!["DEVELOPMENT_TEAM"] as? String {
-            print("\(teamID).\(baseAccessGroup)")
             return "\(teamID).\(baseAccessGroup)"
         }
 
